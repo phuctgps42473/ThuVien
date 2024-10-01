@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +80,10 @@
     <ProjectReference Include="..\ThuVien.BUS\ThuVien.BUS.csproj">
       <Project>{8ebbd457-2943-4654-b4b8-9b146084ec0f}</Project>
       <Name>ThuVien.BUS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ThuVien.DAL\ThuVien.DAL.csproj">
+      <Project>{23bea67b-36da-44ba-b80a-7d214bdc7796}</Project>
+      <Name>ThuVien.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

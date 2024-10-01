@@ -41,10 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="NhanVienBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ThuVien.DAL\ThuVien.DAL.csproj">
+      <Project>{23bea67b-36da-44ba-b80a-7d214bdc7796}</Project>
+      <Name>ThuVien.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ThuVien.DTO\ThuVien.DTO.csproj">
       <Project>{61342522-fcf6-4704-ae28-2b5eeba51828}</Project>
       <Name>ThuVien.DTO</Name>
