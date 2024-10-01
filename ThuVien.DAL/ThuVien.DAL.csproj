@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,13 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="NhanVienDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ThuVien.BUS\ThuVien.BUS.csproj">
-      <Project>{8ebbd457-2943-4654-b4b8-9b146084ec0f}</Project>
-      <Name>ThuVien.BUS</Name>
+    <ProjectReference Include="..\ThuVien.DTO\ThuVien.DTO.csproj">
+      <Project>{61342522-fcf6-4704-ae28-2b5eeba51828}</Project>
+      <Name>ThuVien.DTO</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
