@@ -28,7 +28,7 @@ namespace ThuVien.BUS
             return false;
 
         }
-        //helloss
+        //batocom
 
 
         public void logout()
