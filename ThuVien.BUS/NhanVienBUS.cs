@@ -31,7 +31,16 @@ namespace ThuVien.BUS
 
         public void logout()
         {
-            Session.Instance.clearNhanVien();
+            Session.Instance.ClearNhanVien();
+        }
+
+        public void changePassword(string matKhauMoi)
+        {
+            NhanVienDTO n = Session.Instance.NhanVien;
+            n.MatKhau = matKhauMoi;
+
+            nhanVienDAL.
+
         }
     }
 }

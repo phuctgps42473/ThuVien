@@ -14,6 +14,49 @@ namespace ThuVien.DAL
             _connectionString = DALHelper.ConnectionString;
         }
 
+        public int InsertNhanVien(NhanVienDTO nv)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                string q = "insert into(ten, email, password, dienthoai,la_quanly) value (@ten, @email, @password, @dienthoai, @la_quanly)";
+                SqlCommand cmd = new SqlCommand(q, conn);
+                cmd.Parameters.AddWithValue("@ten", nv.Ten);
+                cmd.Parameters.AddWithValue("@email", nv.Email);
+                cmd.Parameters.AddWithValue("@password", nv.MatKhau);
+                cmd.Parameters.AddWithValue("@dienthoai", nv.DienThoai);
+                cmd.Parameters.AddWithValue("@la_quanly", nv.IsManager);
+                conn.Open();
+                // What is next?
+
+                int rowsAffected = cmd.ExecuteNonQuery(); // Executes the insert command
+                conn.Close();
+                return rowsAffected;
+
+            }
+        }
+
+
+        public int UpdateNhanVien(NhanVienDTO nv)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                string q = "update nhanvien set ten = @ten, email = @email, password = @password, dienthoai = @dienthoai,la_quanly = @la_quanly) where id = @id";
+                SqlCommand cmd = new SqlCommand(q, conn);
+                cmd.Parameters.AddWithValue("@ten", nv.Ten);
+                cmd.Parameters.AddWithValue("@email", nv.Email);
+                cmd.Parameters.AddWithValue("@password", nv.MatKhau);
+                cmd.Parameters.AddWithValue("@dienthoai", nv.DienThoai);
+                cmd.Parameters.AddWithValue("@la_quanly", nv.IsManager);
+                cmd.Parameters.AddWithValue("@id", nv.Id);
+                conn.Open();
+
+                int rowsAffected = cmd.ExecuteNonQuery(); 
+                conn.Close();
+                return rowsAffected;
+
+            }
+        }
+
         public NhanVienDTO GetNhanVienByEmail(string email)
         {
             NhanVienDTO nv = null;
