@@ -12,6 +12,43 @@ namespace ThuVien.DAL
         {
             _connectionString = DALHelper.ConnectionString;
         }
+        public int InsertLoaiSach(LoaiSachDTO l)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                string q = "insert into loaisach(ten, mota) value (@ten, @mota)";
+                SqlCommand cmd = new SqlCommand(q, conn);
+                cmd.Parameters.AddWithValue("@ten", l.Ten);
+                cmd.Parameters.AddWithValue("@email", l.Mota);
+
+                conn.Open();
+                int rowsAffected = cmd.ExecuteNonQuery(); 
+                conn.Close();
+
+                return rowsAffected;
+
+            }
+        }
+
+
+        public int UpdateLoaiSach(LoaiSachDTO l)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                string q = "update loaisach set ten = @ten, mota = @mota) where id = @id";
+                SqlCommand cmd = new SqlCommand(q, conn);
+                cmd.Parameters.AddWithValue("@ten", l.Ten);
+                cmd.Parameters.AddWithValue("@email", l.Mota);
+                cmd.Parameters.AddWithValue("@email", l.Id);
+                conn.Open();
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                conn.Close();
+                return rowsAffected;
+
+            }
+        }
+
 
         public List<LoaiSachDTO> GetAllLoaiSach()
         {

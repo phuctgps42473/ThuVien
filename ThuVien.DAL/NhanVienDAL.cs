@@ -18,7 +18,7 @@ namespace ThuVien.DAL
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
-                string q = "insert into(ten, email, password, dienthoai,la_quanly) value (@ten, @email, @password, @dienthoai, @la_quanly)";
+                string q = "insert into nhanvien(ten, email, password, dienthoai,la_quanly) value (@ten, @email, @password, @dienthoai, @la_quanly)";
                 SqlCommand cmd = new SqlCommand(q, conn);
                 cmd.Parameters.AddWithValue("@ten", nv.Ten);
                 cmd.Parameters.AddWithValue("@email", nv.Email);
@@ -26,9 +26,8 @@ namespace ThuVien.DAL
                 cmd.Parameters.AddWithValue("@dienthoai", nv.DienThoai);
                 cmd.Parameters.AddWithValue("@la_quanly", nv.IsManager);
                 conn.Open();
-                // What is next?
 
-                int rowsAffected = cmd.ExecuteNonQuery(); // Executes the insert command
+                int rowsAffected = cmd.ExecuteNonQuery(); 
                 conn.Close();
                 return rowsAffected;
 
@@ -87,6 +86,36 @@ namespace ThuVien.DAL
 
             return nv;
         }
+
+        public NhanVienDTO GetNhanVienById(int id)
+        {
+            NhanVienDTO nv = null;
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                string q = "SELECT id, ten, email, password, dienthoai, la_quanly FROM nhanvien WHERE id = @id";
+                SqlCommand cmd = new SqlCommand(q, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                conn.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        nv = new NhanVienDTO()
+                        {
+                            Id = (int)reader["id"],
+                            Ten = reader["ten"].ToString(),
+                            Email = reader["email"].ToString(),
+                            MatKhau = reader["password"].ToString(),
+                            DienThoai = reader["dienthoai"].ToString(),
+                            IsManager = (bool)reader["la_quanly"]
+                        };
+                    }
+                }
+            }
+            return nv;
+        }
+
 
         public List<NhanVienDTO> GetAllNhanVien()
         {
