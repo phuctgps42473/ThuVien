@@ -6,16 +6,16 @@ namespace ThuVien.BUS
 {
     public class NhanVienBus
     {
-        private NhanVienDAL nhanVienDAL;
+        private NhanVienDAL _nhanVienDAL;
 
         public NhanVienBus()
         {
-            nhanVienDAL = new NhanVienDAL();
+            _nhanVienDAL = new NhanVienDAL();
         }
 
         public bool ValidateLogin(string email, string password)
         {
-            NhanVienDTO NhanVien = nhanVienDAL.GetNhanVienByEmail(email);
+            NhanVienDTO NhanVien = _nhanVienDAL.GetNhanVienByEmail(email);
 
             if (NhanVien != null)
             {
@@ -31,18 +31,16 @@ namespace ThuVien.BUS
         //batocom
 
 
-        public void logout()
+        public void Logout()
         {
             Session.Instance.ClearNhanVien();
         }
 
-        public void changePassword(string matKhauMoi)
+        public void ChangePassword(string matKhauMoi)
         {
             NhanVienDTO n = Session.Instance.NhanVien;
             n.MatKhau = matKhauMoi;
-
-            nhanVienDAL.
-
+            _nhanVienDAL.UpdateNhanVien(n);
         }
     }
 }
