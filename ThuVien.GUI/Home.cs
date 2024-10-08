@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ThuVien.BUS;
+using ThuVien.DTO;
 
 namespace ThuVien.GUI
 {
@@ -16,7 +18,35 @@ namespace ThuVien.GUI
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
+            LoadUserInfoToTopBar();
+            LoadTimeInfoToTopBar();
             LoadChildForm(new LoaiSachForm());
+        }
+
+
+        private void LoadTimeInfoToTopBar()
+        {
+            DateTime today = DateTime.Now;
+            timeText.Text = today.ToString("HH:mm:ss");
+            dateText.Text = today.Date.ToString();
+
+            timer.Tick += (s, a) =>
+            {
+                today = DateTime.Now;
+                timeText.Text = today.ToString("HH:mm:ss");
+                dateText.Text = today.Date.ToString();
+            };
+            timer.Interval = 1000;
+            timer.Start();
+        }
+
+        private void LoadUserInfoToTopBar()
+        {
+            NhanVienDTO nv = Session.Instance.NhanVien;
+
+            nvNameText.Text = nv.Ten;
+            nvRoleText.Text = nv.IsManager ? "Quản lý" : "Nhân viên";
+
         }
 
         private void LoadChildForm(Form childForm)

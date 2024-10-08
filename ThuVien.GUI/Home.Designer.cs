@@ -44,12 +44,13 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.dateText = new System.Windows.Forms.Label();
+            this.timeText = new System.Windows.Forms.Label();
+            this.nvRoleText = new System.Windows.Forms.Label();
+            this.nvNameText = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -211,10 +212,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.dateText);
+            this.panel2.Controls.Add(this.timeText);
+            this.panel2.Controls.Add(this.nvRoleText);
+            this.panel2.Controls.Add(this.nvNameText);
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1122, 73);
@@ -233,47 +234,47 @@
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
             // 
-            // label3
+            // dateText
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(977, 41);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(142, 28);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "ngày tháng";
+            this.dateText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateText.AutoSize = true;
+            this.dateText.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateText.Location = new System.Drawing.Point(977, 41);
+            this.dateText.Name = "dateText";
+            this.dateText.Size = new System.Drawing.Size(142, 28);
+            this.dateText.TabIndex = 3;
+            this.dateText.Text = "ngày tháng";
             // 
-            // label4
+            // timeText
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(978, 8);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(129, 28);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "thời gian";
+            this.timeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.timeText.AutoSize = true;
+            this.timeText.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeText.Location = new System.Drawing.Point(978, 8);
+            this.timeText.Name = "timeText";
+            this.timeText.Size = new System.Drawing.Size(129, 28);
+            this.timeText.TabIndex = 2;
+            this.timeText.Text = "thời gian";
             // 
-            // label2
+            // nvRoleText
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(80, 41);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 28);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "vai tro";
+            this.nvRoleText.AutoSize = true;
+            this.nvRoleText.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nvRoleText.Location = new System.Drawing.Point(80, 41);
+            this.nvRoleText.Name = "nvRoleText";
+            this.nvRoleText.Size = new System.Drawing.Size(103, 28);
+            this.nvRoleText.TabIndex = 1;
+            this.nvRoleText.Text = "vai tro";
             // 
-            // label1
+            // nvNameText
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(80, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(181, 28);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "ten nhan vien";
+            this.nvNameText.AutoSize = true;
+            this.nvNameText.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nvNameText.Location = new System.Drawing.Point(80, 7);
+            this.nvNameText.Name = "nvNameText";
+            this.nvNameText.Size = new System.Drawing.Size(181, 28);
+            this.nvNameText.TabIndex = 0;
+            this.nvNameText.Text = "ten nhan vien";
             // 
             // mainPanel
             // 
@@ -302,6 +303,10 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1128, 805);
             this.tableLayoutPanel1.TabIndex = 4;
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
             // 
             // Home
             // 
@@ -334,11 +339,11 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label nvNameText;
         private System.Windows.Forms.Panel mainPanel;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label nvRoleText;
+        private System.Windows.Forms.Label dateText;
+        private System.Windows.Forms.Label timeText;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button sachBtn;
@@ -349,5 +354,6 @@
         private System.Windows.Forms.Button dangXuatBtn;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Timer timer;
     }
 }
