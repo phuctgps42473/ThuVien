@@ -1,6 +1,6 @@
 ﻿namespace ThuVien.GUI
 {
-    partial class QLTT
+    partial class PhieuMuonForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QLTT));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PhieuMuonForm));
             this.dgv_qltt = new System.Windows.Forms.DataGridView();
             this.panel_nhapdata = new System.Windows.Forms.Panel();
             this.rdo_thuthu = new System.Windows.Forms.RadioButton();
@@ -169,18 +169,20 @@
             // 
             // btn_timkiem
             // 
+            this.btn_timkiem.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btn_timkiem.Image = ((System.Drawing.Image)(resources.GetObject("btn_timkiem.Image")));
-            this.btn_timkiem.Location = new System.Drawing.Point(898, 24);
+            this.btn_timkiem.Location = new System.Drawing.Point(895, 24);
             this.btn_timkiem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btn_timkiem.Name = "btn_timkiem";
             this.btn_timkiem.Size = new System.Drawing.Size(89, 99);
             this.btn_timkiem.TabIndex = 5;
             this.btn_timkiem.UseVisualStyleBackColor = true;
+            this.btn_timkiem.Click += new System.EventHandler(this.btn_timkiem_Click);
             // 
             // btn_lammoi
             // 
             this.btn_lammoi.Image = ((System.Drawing.Image)(resources.GetObject("btn_lammoi.Image")));
-            this.btn_lammoi.Location = new System.Drawing.Point(552, 24);
+            this.btn_lammoi.Location = new System.Drawing.Point(423, 24);
             this.btn_lammoi.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btn_lammoi.Name = "btn_lammoi";
             this.btn_lammoi.Size = new System.Drawing.Size(89, 99);
@@ -189,18 +191,20 @@
             // 
             // txt_timkiem
             // 
+            this.txt_timkiem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_timkiem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_timkiem.Location = new System.Drawing.Point(1022, 48);
+            this.txt_timkiem.Location = new System.Drawing.Point(1013, 49);
             this.txt_timkiem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_timkiem.Name = "txt_timkiem";
-            this.txt_timkiem.Size = new System.Drawing.Size(381, 50);
+            this.txt_timkiem.Size = new System.Drawing.Size(135, 50);
             this.txt_timkiem.TabIndex = 3;
             this.txt_timkiem.Text = "";
             // 
             // btn_them
             // 
             this.btn_them.Image = ((System.Drawing.Image)(resources.GetObject("btn_them.Image")));
-            this.btn_them.Location = new System.Drawing.Point(78, 24);
+            this.btn_them.Location = new System.Drawing.Point(54, 24);
             this.btn_them.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btn_them.Name = "btn_them";
             this.btn_them.Size = new System.Drawing.Size(89, 99);
@@ -210,7 +214,7 @@
             // btn_xoa
             // 
             this.btn_xoa.Image = ((System.Drawing.Image)(resources.GetObject("btn_xoa.Image")));
-            this.btn_xoa.Location = new System.Drawing.Point(394, 24);
+            this.btn_xoa.Location = new System.Drawing.Point(301, 24);
             this.btn_xoa.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btn_xoa.Name = "btn_xoa";
             this.btn_xoa.Size = new System.Drawing.Size(89, 99);
@@ -220,7 +224,7 @@
             // btn_sua
             // 
             this.btn_sua.Image = ((System.Drawing.Image)(resources.GetObject("btn_sua.Image")));
-            this.btn_sua.Location = new System.Drawing.Point(236, 24);
+            this.btn_sua.Location = new System.Drawing.Point(178, 24);
             this.btn_sua.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btn_sua.Name = "btn_sua";
             this.btn_sua.Size = new System.Drawing.Size(89, 99);
@@ -233,11 +237,11 @@
             this.lbl_qltt.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_qltt.Location = new System.Drawing.Point(14, 8);
             this.lbl_qltt.Name = "lbl_qltt";
-            this.lbl_qltt.Size = new System.Drawing.Size(396, 46);
+            this.lbl_qltt.Size = new System.Drawing.Size(479, 46);
             this.lbl_qltt.TabIndex = 5;
-            this.lbl_qltt.Text = "QUẢN LÝ THỦ THƯ";
+            this.lbl_qltt.Text = "QUẢN LÝ PHIẾU MƯỢN";
             // 
-            // QLTT
+            // PhieuMuonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -248,7 +252,7 @@
             this.Controls.Add(this.panel_nhapdata);
             this.Controls.Add(this.dgv_qltt);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "QLTT";
+            this.Name = "PhieuMuonForm";
             this.Text = "QLTT";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_qltt)).EndInit();
             this.panel_nhapdata.ResumeLayout(false);

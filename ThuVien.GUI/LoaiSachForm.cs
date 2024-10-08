@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ThuVien.GUI
 {
-    public partial class QLTT : Form
+    public partial class LoaiSachForm : Form
     {
-        public QLTT()
+        public LoaiSachForm()
         {
             InitializeComponent();
         }

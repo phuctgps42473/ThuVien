@@ -16,12 +16,15 @@ namespace ThuVien.GUI
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
-            ShowChildFormInPanel();
+            LoadChildForm(new LoaiSachForm());
         }
 
-        private void ShowChildFormInPanel()
+        private void LoadChildForm(Form childForm)
         {
-            QLTT childForm = new QLTT();
+            if (mainPanel.Controls.Count > 0)
+            {
+                mainPanel.Controls.Clear();
+            }
 
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
@@ -51,11 +54,6 @@ namespace ThuVien.GUI
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void label4_Click(object sender, EventArgs e)
         {
 
@@ -69,6 +67,36 @@ namespace ThuVien.GUI
         private void mainPanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void loaiSachBtn_Click(object sender, EventArgs e)
+        {
+            LoadChildForm(new LoaiSachForm());
+        }
+
+        private void nhanVienBtn_Click(object sender, EventArgs e)
+        {
+            LoadChildForm(new ThuThuForm());
+        }
+
+        private void sachBtn_Click(object sender, EventArgs e)
+        {
+            LoadChildForm(new SachForm());
+        }
+
+        private void phieuMuonBtn_Click(object sender, EventArgs e)
+        {
+            LoadChildForm(new PhieuMuonForm());
+        }
+
+        private void docGiaBtn_Click(object sender, EventArgs e)
+        {
+            LoadChildForm(new DocGiaForm());
+        }
+
+        private void thongKeBtn_Click(object sender, EventArgs e)
+        {
+            //LoadChildForm(new ThongKe());
         }
     }
 }
