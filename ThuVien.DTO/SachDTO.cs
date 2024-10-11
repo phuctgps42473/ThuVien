@@ -14,8 +14,31 @@ namespace ThuVien.DTO
         public int TaiBan { get; set; }
         public int SoLuong { get; set; }
         public int TonKho { get; set; }
-        public bool IsAvailable { get; set; }
+        public int CoSan { get; set; }
         public int IdLoai { get; set; }
+        public SachDTO() { }
 
+
+        public SachDTO(int id, string name, string tacgia, int taiban, int soluong, int tonkho, int cosan, int idloai)
+        {
+            Id = id;
+            Ten = name;
+            TacGia = tacgia;
+            TaiBan = taiban;
+            SoLuong = soluong;
+            TonKho = tonkho;
+            CoSan = cosan;
+            IdLoai = idloai;
+        }
+        public SachDTO(string name, string tacgia, int taiban, int soluong, int tonkho, int cosan, int idloai)
+        {
+            Ten = name;
+            TacGia = tacgia;
+            TaiBan = taiban;
+            SoLuong = soluong;
+            TonKho = tonkho;
+            CoSan = cosan;
+            IdLoai = idloai;
+        }
     }
 }
