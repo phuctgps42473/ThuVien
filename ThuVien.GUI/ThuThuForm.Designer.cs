@@ -31,9 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThuThuForm));
             this.dgv_qltt = new System.Windows.Forms.DataGridView();
             this.panel_nhapdata = new System.Windows.Forms.Panel();
-            this.grb_vaitro = new System.Windows.Forms.GroupBox();
-            this.rdo_thuthu = new System.Windows.Forms.RadioButton();
-            this.rdo_quanly = new System.Windows.Forms.RadioButton();
             this.txt_matkhau = new System.Windows.Forms.RichTextBox();
             this.txt_Manv = new System.Windows.Forms.RichTextBox();
             this.txt_sdt = new System.Windows.Forms.RichTextBox();
@@ -47,10 +44,13 @@
             this.btn_xoa = new System.Windows.Forms.Button();
             this.btn_sua = new System.Windows.Forms.Button();
             this.lbl_qltt = new System.Windows.Forms.Label();
+            this.rdo_quanly = new System.Windows.Forms.RadioButton();
+            this.rdo_thuthu = new System.Windows.Forms.RadioButton();
+            this.grb_vaitro = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_qltt)).BeginInit();
             this.panel_nhapdata.SuspendLayout();
-            this.grb_vaitro.SuspendLayout();
             this.panel_chucnang.SuspendLayout();
+            this.grb_vaitro.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgv_qltt
@@ -86,41 +86,6 @@
             this.panel_nhapdata.Name = "panel_nhapdata";
             this.panel_nhapdata.Size = new System.Drawing.Size(368, 373);
             this.panel_nhapdata.TabIndex = 3;
-            // 
-            // grb_vaitro
-            // 
-            this.grb_vaitro.Controls.Add(this.rdo_thuthu);
-            this.grb_vaitro.Controls.Add(this.rdo_quanly);
-            this.grb_vaitro.Location = new System.Drawing.Point(15, 306);
-            this.grb_vaitro.Name = "grb_vaitro";
-            this.grb_vaitro.Size = new System.Drawing.Size(336, 64);
-            this.grb_vaitro.TabIndex = 6;
-            this.grb_vaitro.TabStop = false;
-            this.grb_vaitro.Text = "Vai Trò";
-            // 
-            // rdo_thuthu
-            // 
-            this.rdo_thuthu.AutoSize = true;
-            this.rdo_thuthu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_thuthu.Location = new System.Drawing.Point(201, 21);
-            this.rdo_thuthu.Name = "rdo_thuthu";
-            this.rdo_thuthu.Size = new System.Drawing.Size(116, 24);
-            this.rdo_thuthu.TabIndex = 1;
-            this.rdo_thuthu.TabStop = true;
-            this.rdo_thuthu.Text = "Nhân Viên";
-            this.rdo_thuthu.UseVisualStyleBackColor = true;
-            // 
-            // rdo_quanly
-            // 
-            this.rdo_quanly.AutoSize = true;
-            this.rdo_quanly.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_quanly.Location = new System.Drawing.Point(19, 21);
-            this.rdo_quanly.Name = "rdo_quanly";
-            this.rdo_quanly.Size = new System.Drawing.Size(100, 24);
-            this.rdo_quanly.TabIndex = 0;
-            this.rdo_quanly.TabStop = true;
-            this.rdo_quanly.Text = "Quản Lý";
-            this.rdo_quanly.UseVisualStyleBackColor = true;
             // 
             // txt_matkhau
             // 
@@ -264,6 +229,41 @@
             this.lbl_qltt.Text = "QUẢN LÝ THỦ THƯ";
             this.lbl_qltt.Click += new System.EventHandler(this.lbl_qltt_Click);
             // 
+            // rdo_quanly
+            // 
+            this.rdo_quanly.AutoSize = true;
+            this.rdo_quanly.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_quanly.Location = new System.Drawing.Point(19, 21);
+            this.rdo_quanly.Name = "rdo_quanly";
+            this.rdo_quanly.Size = new System.Drawing.Size(100, 24);
+            this.rdo_quanly.TabIndex = 0;
+            this.rdo_quanly.TabStop = true;
+            this.rdo_quanly.Text = "Quản Lý";
+            this.rdo_quanly.UseVisualStyleBackColor = true;
+            // 
+            // rdo_thuthu
+            // 
+            this.rdo_thuthu.AutoSize = true;
+            this.rdo_thuthu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_thuthu.Location = new System.Drawing.Point(201, 21);
+            this.rdo_thuthu.Name = "rdo_thuthu";
+            this.rdo_thuthu.Size = new System.Drawing.Size(116, 24);
+            this.rdo_thuthu.TabIndex = 1;
+            this.rdo_thuthu.TabStop = true;
+            this.rdo_thuthu.Text = "Nhân Viên";
+            this.rdo_thuthu.UseVisualStyleBackColor = true;
+            // 
+            // grb_vaitro
+            // 
+            this.grb_vaitro.Controls.Add(this.rdo_thuthu);
+            this.grb_vaitro.Controls.Add(this.rdo_quanly);
+            this.grb_vaitro.Location = new System.Drawing.Point(15, 306);
+            this.grb_vaitro.Name = "grb_vaitro";
+            this.grb_vaitro.Size = new System.Drawing.Size(336, 64);
+            this.grb_vaitro.TabIndex = 6;
+            this.grb_vaitro.TabStop = false;
+            this.grb_vaitro.Text = "Vai Trò";
+            // 
             // ThuThuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -279,9 +279,9 @@
             this.Load += new System.EventHandler(this.ThuThuForm_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_qltt)).EndInit();
             this.panel_nhapdata.ResumeLayout(false);
+            this.panel_chucnang.ResumeLayout(false);
             this.grb_vaitro.ResumeLayout(false);
             this.grb_vaitro.PerformLayout();
-            this.panel_chucnang.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

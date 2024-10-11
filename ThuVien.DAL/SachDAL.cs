@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Runtime.Remoting.Messaging;
 using ThuVien.DTO;
@@ -36,7 +37,7 @@ namespace ThuVien.DAL
                             TaiBan = (int)r["taiban"],
                             SoLuong = (int)r["soluong"],
                             TonKho = (int)r["tonkho"],
-                            IsAvailable = (bool)r["cosan"],
+                            CoSan = (int)r["cosan"],
                             IdLoai = (int)r["id_loaisach"]
                         };
                     }
@@ -44,45 +45,26 @@ namespace ThuVien.DAL
             }
             return sach;
         }
+       
 
-
-        public List<SachDTO> GetAllSach()
+        public DataTable GetAllSach()
         {
-            List<SachDTO> l = new List<SachDTO>();
-
-            using (SqlConnection conn = new SqlConnection(DALHelper.ConnectionString))
+            using (SqlConnection conn = new SqlConnection(_connString))
             {
                 string q = "SELECT id, ten, tacgia, taiban, soluong, tonkho, cosan,id_loaisach FROM sach";
                 SqlCommand cmd = new SqlCommand(q, conn);
-
                 conn.Open();
-                using (SqlDataReader r = cmd.ExecuteReader())
-                {
-                    while (r.Read())
-                    {
-                        SachDTO s = new SachDTO()
-                        {
-                            Id = (int)r["id"],
-                            Ten = r["ten"].ToString(),
-                            TacGia = r["tacgia"].ToString(),
-                            TaiBan = (int)r["taiban"],
-                            SoLuong = (int)r["soluong"],
-                            TonKho = (int)r["tonkho"],
-                            IsAvailable = (bool)r["cosan"],
-                            IdLoai = (int)r["id_loai"]
-                        };
-                        l.Add(s);
-                    }
-
-                }
+                DataTable data = new DataTable();
+                data.Load(cmd.ExecuteReader());
+                return data;
             }
-            return l;
         }
 
-        public int InsertSach(SachDTO sach)
+        public bool InsertSach(SachDTO sach)
         {
             using (SqlConnection conn = new SqlConnection(DALHelper.ConnectionString))
             {
+                conn.Open();
                 string q = "INSERT INTO sach (ten, tacgia, taiban, soluong, tonkho, cosan, id_loaisach) " +
                            "VALUES (@ten, @tacgia, @taiban, @soluong, @tonkho, @cosan, @id_loaisach)";
                 SqlCommand cmd = new SqlCommand(q, conn);
@@ -91,18 +73,23 @@ namespace ThuVien.DAL
                 cmd.Parameters.AddWithValue("@taiban", sach.TaiBan);
                 cmd.Parameters.AddWithValue("@soluong", sach.SoLuong);
                 cmd.Parameters.AddWithValue("@tonkho", sach.TonKho);
-                cmd.Parameters.AddWithValue("@cosan", sach.IsAvailable);
+                cmd.Parameters.AddWithValue("@cosan", sach.CoSan);
                 cmd.Parameters.AddWithValue("@id_loaisach", sach.IdLoai);
 
-                conn.Open();
-                return cmd.ExecuteNonQuery(); // Returns the number of rows affected
+                
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+                return false;
             }
         }
 
-        public int UpdateSach(SachDTO sach)
+        public bool UpdateSach(SachDTO sach)
         {
             using (SqlConnection conn = new SqlConnection(DALHelper.ConnectionString))
             {
+                conn.Open();
                 string q = "UPDATE sach SET ten = @ten, tacgia = @tacgia, taiban = @taiban, " +
                            "soluong = @soluong, tonkho = @tonkho, cosan = @cosan, id_loaisach = @id_loaisach WHERE id = @id";
                 SqlCommand cmd = new SqlCommand(q, conn);
@@ -111,25 +98,34 @@ namespace ThuVien.DAL
                 cmd.Parameters.AddWithValue("@taiban", sach.TaiBan);
                 cmd.Parameters.AddWithValue("@soluong", sach.SoLuong);
                 cmd.Parameters.AddWithValue("@tonkho", sach.TonKho);
-                cmd.Parameters.AddWithValue("@cosan", sach.IsAvailable);
+                cmd.Parameters.AddWithValue("@cosan", sach.CoSan);
                 cmd.Parameters.AddWithValue("@id_loaisach", sach.IdLoai);
                 cmd.Parameters.AddWithValue("@id", sach.Id);
 
-                conn.Open();
-                return cmd.ExecuteNonQuery(); // Returns the number of rows affected
+                
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+                return false;// Returns the number of rows affected
             }
         }
 
-        public int DeleteSach(int id)
+        public bool DeleteSach(int id)
         {
             using (SqlConnection conn = new SqlConnection(DALHelper.ConnectionString))
             {
+                conn.Open();
                 string q = "DELETE FROM sach WHERE id = @id";
                 SqlCommand cmd = new SqlCommand(q, conn);
                 cmd.Parameters.AddWithValue("@id", id);
 
-                conn.Open();
-                return cmd.ExecuteNonQuery(); // Returns the number of rows affected
+                
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+                return false;
             }
         }
 
