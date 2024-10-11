@@ -14,6 +14,10 @@ namespace ThuVien.GUI
 {
     public partial class Home : Form
     {
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
         public Home()
         {
             InitializeComponent();

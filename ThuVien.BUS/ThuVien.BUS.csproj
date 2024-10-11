@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthBUS.cs" />
+    <Compile Include="MuonTra_BUS.cs" />
     <Compile Include="NhanVienBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SachBus.cs" />
