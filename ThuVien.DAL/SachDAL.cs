@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Runtime.Remoting.Messaging;
@@ -87,6 +88,7 @@ namespace ThuVien.DAL
 
         public bool UpdateSach(SachDTO sach)
         {
+
             using (SqlConnection conn = new SqlConnection(DALHelper.ConnectionString))
             {
                 conn.Open();
@@ -128,7 +130,51 @@ namespace ThuVien.DAL
                 return false;
             }
         }
+        public DataTable searchSach(string tensach)
+        {
+            using (SqlConnection conn = new SqlConnection(DALHelper.ConnectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string q = "SELECT id, ten, tacgia, taiban, soluong, tonkho, cosan,id_loaisach FROM sach WHERE ten LIKE '%' + @ten + '%'";
+                    SqlCommand cmd = new SqlCommand(q, conn);
 
+                    // Use "@" prefix for parameter
+                    cmd.Parameters.AddWithValue("@ten", tensach);
+
+                    DataTable ds = new DataTable();
+                    ds.Load(cmd.ExecuteReader());
+
+                    return ds;
+                }
+                catch (SqlException ex)
+                {
+                    // Handle SQL exceptions
+                    Console.WriteLine("An error occurred: " + ex.Message);
+                    return null; // Or handle it as needed
+                }
+            }
+        }
+        public DataTable LoaiSach()
+        {
+            using (SqlConnection conn = new SqlConnection(DALHelper.ConnectionString))
+            {
+            
+                conn.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.Text; 
+                cmd.CommandText = "SELECT * FROM loaisach"; 
+                cmd.Connection = conn;
+
+                DataTable dsLoaiHang = new DataTable();
+                dsLoaiHang.Load(cmd.ExecuteReader());
+
+                return dsLoaiHang;
+            
+
+            }
+        }
 
     }
 }

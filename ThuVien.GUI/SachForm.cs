@@ -19,6 +19,7 @@ namespace ThuVien.GUI
         public SachForm()
         {
             InitializeComponent();
+            LoadSachIntoComboBox();
         }
         private void LoadGridView_NhanVien()
         {
@@ -31,11 +32,28 @@ namespace ThuVien.GUI
             dgv_qltt.Columns[5].HeaderText = "Tồn Kho";
             dgv_qltt.Columns[6].HeaderText = "Có Sẵn";
         }
-        
+
 
         private void btn_timkiem_Click(object sender, EventArgs e)
         {
-
+            string tensach = txt_timkiem.Text;
+            DataTable ds = bussach.searchSach(tensach);
+            if (ds.Rows.Count > 0)
+            {
+                dgv_qltt.DataSource = ds;
+                dgv_qltt.Columns[0].HeaderText = "Mã Sách";
+                dgv_qltt.Columns[1].HeaderText = "Tên Sách";
+                dgv_qltt.Columns[2].HeaderText = "Tác Giả";
+                dgv_qltt.Columns[3].HeaderText = "Tái Bản";
+                dgv_qltt.Columns[4].HeaderText = "Số lượng";
+                dgv_qltt.Columns[5].HeaderText = "Tồn Kho";
+                dgv_qltt.Columns[6].HeaderText = "Có Sẵn";
+            }
+            else
+            {
+                MessageBox.Show("Không Tìm Thấy Sách", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            ResetValue();
         }
         public bool isValid(string emailaddress)
         {
@@ -51,7 +69,7 @@ namespace ThuVien.GUI
         }
         private void btn_them_Click(object sender, EventArgs e)
         {
-            
+
             if (string.IsNullOrWhiteSpace(txt_tensach.Text) && string.IsNullOrWhiteSpace(txt_tacgia.Text) && string.IsNullOrWhiteSpace(txt_taiban.Text) && string.IsNullOrWhiteSpace(txt_soluong.Text) && string.IsNullOrWhiteSpace(txt_tonkho.Text) && string.IsNullOrWhiteSpace(txt_cosan.Text))
             {
                 MessageBox.Show("Bạn Phải Nhập Đầy Đủ Thông Tin", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -98,7 +116,7 @@ namespace ThuVien.GUI
                 return;
             }
 
-            int taiBan, soLuong, tonKho,cosan, idLoai;
+            int taiBan, soLuong, tonKho, cosan, idLoai;
             bool isAvailable = true; // Set this based on your application's logic
 
             // Try parsing the input values to integers
@@ -117,7 +135,7 @@ namespace ThuVien.GUI
                     taiBan,                  // int
                     soLuong,                 // int
                     tonKho,                  // int
-                    cosan,             
+                    cosan,
                     idLoai                   // int
                 );
 
@@ -227,63 +245,64 @@ namespace ThuVien.GUI
 
             if (string.IsNullOrWhiteSpace(txt_soluong.Text))
             {
-                MessageBox.Show("Bạn Phải Nhập Mật Khẩu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Bạn Phải Nhập Số Lượng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txt_soluong.Focus();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txt_tonkho.Text))
             {
-                MessageBox.Show("Bạn Phải Nhập Mật Khẩu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Bạn Phải Nhập Số Lượng Tồn Kho", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txt_tonkho.Focus();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txt_cosan.Text))
             {
-                MessageBox.Show("Bạn Phải Nhập Mật Khẩu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Bạn Phải Nhập Số Sách Có Sẵn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txt_cosan.Focus();
                 return;
             }
 
             int taiBan, soLuong, tonKho, cosan, idLoai;
-            bool isAvailable = true; // Set this based on your application's logic
 
-            // Try parsing the input values to integers
-            bool isTaiBanValid = int.TryParse(txt_taiban.Text.Trim(), out taiBan);
-            bool isSoLuongValid = int.TryParse(txt_soluong.Text.Trim(), out soLuong);
-            bool isTonKhoValid = int.TryParse(txt_tonkho.Text.Trim(), out tonKho);
-            bool isCoSanValid = int.TryParse(txt_cosan.Text.Trim(), out cosan); // Assuming this is meant to be an integer
-            bool isIdLoaiValid = int.TryParse(cbo_loaisach.Text.Trim(), out idLoai);
-            // Check if all values are valid
-            if (isTaiBanValid && isSoLuongValid && isTonKhoValid && isIdLoaiValid)
+            // Kiểm tra các tham số
+            if (int.TryParse(txt_taiban.Text.Trim(), out taiBan) &&
+                int.TryParse(txt_soluong.Text.Trim(), out soLuong) &&
+                int.TryParse(txt_tonkho.Text.Trim(), out tonKho) &&
+                int.TryParse(txt_cosan.Text.Trim(), out cosan) &&
+                int.TryParse(cbo_loaisach.Text.Trim(), out idLoai) &&
+                int.TryParse(txt_masach.Text.Trim(), out int id)) // Lấy ID từ textbox
+
             {
-                // Create an instance of SachDTO with the correct types
+                // Tạo đối tượng SachDTO
                 SachDTO sach = new SachDTO(
                     txt_tensach.Text.Trim(), // string
                     txt_tacgia.Text.Trim(),  // string
                     taiBan,                  // int
                     soLuong,                 // int
                     tonKho,                  // int
-                    cosan,
+                    cosan,                   // int
                     idLoai                   // int
-                );
+                    )
+                {
+                    Id = id // Gán ID vào đối tượng SachDTO
+                };
 
-                // Insert the new SachDTO into the database or collection
                 if (bussach.UpdateSach(sach))
                 {
-                    MessageBox.Show("Thêm Thành Công");
+                    MessageBox.Show("Sửa Thành Công");
                     ResetValue();
                     LoadGridView_NhanVien();
                 }
                 else
                 {
-                    MessageBox.Show("Thêm Không Thành Công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Sửa Không Thành Công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
             {
-                MessageBox.Show("Vui lòng nhập số lượng, tồn kho, và loại ID hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập tất cả thông tin hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -291,7 +310,14 @@ namespace ThuVien.GUI
         {
 
         }
+        private void LoadSachIntoComboBox()
+        {
 
+            DataTable dtLoaiHang = bussach.LoaiSach();
+            cbo_loaisach.DataSource = dtLoaiHang;
+            cbo_loaisach.DisplayMember = "id";
+            cbo_loaisach.ValueMember = "ten";
+        }
         private void cbo_loaisach_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -309,7 +335,7 @@ namespace ThuVien.GUI
         private void btn_xoa_Click(object sender, EventArgs e)
         {
             SachDTO sach = new SachDTO();
-            
+
             if (txt_tensach.Text == "Tên Sách" || txt_taiban.Text == "Tái Bản Lần Thứ Mấy" || txt_tacgia.Text == "Tên Tác Giả" || txt_soluong.Text == "Nhập Số Lượng Sách" || txt_tonkho.Text == "Có Bao Nhiêu Sách Trong Kho" || txt_cosan.Text == "Sách Có Sẳn Hay Không" || cbo_loaisach.Text == "Nhập ID Thể Loại")
             {
                 MessageBox.Show("Bạn Phải Chọn Sách Để Xóa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -326,6 +352,37 @@ namespace ThuVien.GUI
             {
                 MessageBox.Show("Xóa Không Thành Công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void txt_tensach_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgv_qltt_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgv_qltt.Rows.Count > 1)
+            {
+                txt_masach.Text = dgv_qltt.CurrentRow.Cells["id"].Value.ToString();
+                txt_tensach.Text = dgv_qltt.CurrentRow.Cells["ten"].Value.ToString();
+                txt_tacgia.Text = dgv_qltt.CurrentRow.Cells["tacgia"].Value.ToString();
+                txt_taiban.Text = dgv_qltt.CurrentRow.Cells["taiban"].Value.ToString();
+                txt_soluong.Text = dgv_qltt.CurrentRow.Cells["soluong"].Value.ToString();
+                txt_tonkho.Text = dgv_qltt.CurrentRow.Cells["tonkho"].Value.ToString();
+                txt_cosan.Text = dgv_qltt.CurrentRow.Cells["cosan"].Value.ToString();
+
+
+                cbo_loaisach.Text = dgv_qltt.CurrentRow.Cells["id_loaisach"].Value.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Bảng Không Tồn Tại Dữ Liệu", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btn_lammoi_Click(object sender, EventArgs e)
+        {
+            ResetValue();
         }
     }
 }

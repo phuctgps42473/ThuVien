@@ -28,5 +28,14 @@ namespace ThuVien.BUS
         {
             return _sachDal.DeleteSach(id);
         }
+        public DataTable LoaiSach()
+        {
+            return _sachDal.LoaiSach();
+        }
+
+        public DataTable searchSach(string tensach)
+        {
+            return _sachDal.searchSach(tensach);
+        }
     }
 }
