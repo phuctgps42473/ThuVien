@@ -39,6 +39,7 @@
             this.btn_sua = new System.Windows.Forms.Button();
             this.lbl_qltt = new System.Windows.Forms.Label();
             this.panel_nhapdata = new System.Windows.Forms.Panel();
+            this.cbo_loaisach = new System.Windows.Forms.ComboBox();
             this.txt_cosan = new System.Windows.Forms.RichTextBox();
             this.txt_tonkho = new System.Windows.Forms.RichTextBox();
             this.txt_soluong = new System.Windows.Forms.RichTextBox();
@@ -46,7 +47,6 @@
             this.txt_taiban = new System.Windows.Forms.RichTextBox();
             this.txt_tacgia = new System.Windows.Forms.RichTextBox();
             this.txt_tensach = new System.Windows.Forms.RichTextBox();
-            this.cbo_loaisach = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_qltt)).BeginInit();
             this.panel_chucnang.SuspendLayout();
             this.panel_nhapdata.SuspendLayout();
@@ -65,6 +65,7 @@
             this.dgv_qltt.RowTemplate.Height = 24;
             this.dgv_qltt.Size = new System.Drawing.Size(653, 373);
             this.dgv_qltt.TabIndex = 0;
+            this.dgv_qltt.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_qltt_CellContentClick);
             // 
             // panel_chucnang
             // 
@@ -102,6 +103,7 @@
             this.btn_lammoi.Size = new System.Drawing.Size(79, 79);
             this.btn_lammoi.TabIndex = 4;
             this.btn_lammoi.UseVisualStyleBackColor = true;
+            this.btn_lammoi.Click += new System.EventHandler(this.btn_lammoi_Click);
             // 
             // txt_timkiem
             // 
@@ -173,6 +175,15 @@
             this.panel_nhapdata.Size = new System.Drawing.Size(368, 373);
             this.panel_nhapdata.TabIndex = 6;
             // 
+            // cbo_loaisach
+            // 
+            this.cbo_loaisach.FormattingEnabled = true;
+            this.cbo_loaisach.Location = new System.Drawing.Point(15, 332);
+            this.cbo_loaisach.Name = "cbo_loaisach";
+            this.cbo_loaisach.Size = new System.Drawing.Size(342, 24);
+            this.cbo_loaisach.TabIndex = 7;
+            this.cbo_loaisach.SelectedIndexChanged += new System.EventHandler(this.cbo_loaisach_SelectedIndexChanged);
+            // 
             // txt_cosan
             // 
             this.txt_cosan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -243,15 +254,7 @@
             this.txt_tensach.TabIndex = 0;
             this.txt_tensach.Text = "";
             this.txt_tensach.Click += new System.EventHandler(this.txt_tensach_Click);
-            // 
-            // cbo_loaisach
-            // 
-            this.cbo_loaisach.FormattingEnabled = true;
-            this.cbo_loaisach.Location = new System.Drawing.Point(15, 332);
-            this.cbo_loaisach.Name = "cbo_loaisach";
-            this.cbo_loaisach.Size = new System.Drawing.Size(342, 24);
-            this.cbo_loaisach.TabIndex = 7;
-            this.cbo_loaisach.SelectedIndexChanged += new System.EventHandler(this.cbo_loaisach_SelectedIndexChanged);
+            this.txt_tensach.TextChanged += new System.EventHandler(this.txt_tensach_TextChanged);
             // 
             // SachForm
             // 
