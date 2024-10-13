@@ -95,6 +95,7 @@
             this.dangXuatBtn.TabIndex = 6;
             this.dangXuatBtn.Text = "Đăng xuất";
             this.dangXuatBtn.UseVisualStyleBackColor = false;
+            this.dangXuatBtn.Click += new System.EventHandler(this.dangXuatBtn_Click);
             // 
             // sachBtn
             // 

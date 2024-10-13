@@ -21,7 +21,17 @@ namespace ThuVien.GUI
             LoadUserInfoToTopBar();
             LoadTimeInfoToTopBar();
             CheckAuth();
+            ShowContentByRole();
             LoadChildForm(new LoaiSachForm());
+        }
+
+        private void ShowContentByRole()
+        {
+            if (!Session.Instance.NhanVien.IsManager)
+            {
+                thongKeBtn.Hide();
+                nhanVienBtn.Hide();
+            }
         }
 
         private void CheckAuth()
@@ -147,6 +157,12 @@ namespace ThuVien.GUI
         private void Home_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void dangXuatBtn_Click(object sender, EventArgs e)
+        {
+            Session.Instance.ClearNhanVien();
+            this.Close();
         }
     }
 }
