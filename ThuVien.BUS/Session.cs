@@ -34,7 +34,6 @@ namespace ThuVien.BUS
         public void ClearNhanVien()
         {
             this.NhanVien = null;
-
         }
 
 
