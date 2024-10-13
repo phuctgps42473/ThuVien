@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocGiaForm));
-            this.dgv_qltt = new System.Windows.Forms.DataGridView();
+            this.dgv_docgia = new System.Windows.Forms.DataGridView();
             this.panel_nhapdata = new System.Windows.Forms.Panel();
-            this.rdo_thuthu = new System.Windows.Forms.RadioButton();
-            this.rdo_quanly = new System.Windows.Forms.RadioButton();
-            this.txt_Manv = new System.Windows.Forms.RichTextBox();
+            this.txt_MaDocGia = new System.Windows.Forms.RichTextBox();
             this.txt_sdt = new System.Windows.Forms.RichTextBox();
             this.txt_email = new System.Windows.Forms.RichTextBox();
             this.txt_hoten = new System.Windows.Forms.RichTextBox();
@@ -45,25 +43,32 @@
             this.btn_xoa = new System.Windows.Forms.Button();
             this.btn_sua = new System.Windows.Forms.Button();
             this.lbl_qltt = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_qltt)).BeginInit();
+            this.txt_diachi = new System.Windows.Forms.RichTextBox();
+            this.txt_tiencoc = new System.Windows.Forms.RichTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_docgia)).BeginInit();
             this.panel_nhapdata.SuspendLayout();
             this.panel_chucnang.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dgv_qltt
+            // dgv_docgia
             // 
-            this.dgv_qltt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgv_docgia.AllowUserToAddRows = false;
+            this.dgv_docgia.AllowUserToDeleteRows = false;
+            this.dgv_docgia.AllowUserToOrderColumns = true;
+            this.dgv_docgia.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgv_qltt.BackgroundColor = System.Drawing.Color.White;
-            this.dgv_qltt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_qltt.Location = new System.Drawing.Point(12, 66);
-            this.dgv_qltt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dgv_qltt.Name = "dgv_qltt";
-            this.dgv_qltt.RowHeadersWidth = 51;
-            this.dgv_qltt.RowTemplate.Height = 24;
-            this.dgv_qltt.Size = new System.Drawing.Size(735, 466);
-            this.dgv_qltt.TabIndex = 0;
+            this.dgv_docgia.BackgroundColor = System.Drawing.Color.White;
+            this.dgv_docgia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_docgia.Location = new System.Drawing.Point(12, 66);
+            this.dgv_docgia.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgv_docgia.MultiSelect = false;
+            this.dgv_docgia.Name = "dgv_docgia";
+            this.dgv_docgia.ReadOnly = true;
+            this.dgv_docgia.RowHeadersWidth = 51;
+            this.dgv_docgia.RowTemplate.Height = 24;
+            this.dgv_docgia.Size = new System.Drawing.Size(735, 466);
+            this.dgv_docgia.TabIndex = 0;
             // 
             // panel_nhapdata
             // 
@@ -71,9 +76,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_nhapdata.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel_nhapdata.BackColor = System.Drawing.Color.Silver;
-            this.panel_nhapdata.Controls.Add(this.rdo_thuthu);
-            this.panel_nhapdata.Controls.Add(this.rdo_quanly);
-            this.panel_nhapdata.Controls.Add(this.txt_Manv);
+            this.panel_nhapdata.Controls.Add(this.txt_tiencoc);
+            this.panel_nhapdata.Controls.Add(this.txt_diachi);
+            this.panel_nhapdata.Controls.Add(this.txt_MaDocGia);
             this.panel_nhapdata.Controls.Add(this.txt_sdt);
             this.panel_nhapdata.Controls.Add(this.txt_email);
             this.panel_nhapdata.Controls.Add(this.txt_hoten);
@@ -83,41 +88,16 @@
             this.panel_nhapdata.Size = new System.Drawing.Size(414, 466);
             this.panel_nhapdata.TabIndex = 3;
             // 
-            // rdo_thuthu
+            // txt_MaDocGia
             // 
-            this.rdo_thuthu.AutoSize = true;
-            this.rdo_thuthu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_thuthu.Location = new System.Drawing.Point(269, 332);
-            this.rdo_thuthu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.rdo_thuthu.Name = "rdo_thuthu";
-            this.rdo_thuthu.Size = new System.Drawing.Size(135, 33);
-            this.rdo_thuthu.TabIndex = 5;
-            this.rdo_thuthu.TabStop = true;
-            this.rdo_thuthu.Text = "Thủ Thư";
-            this.rdo_thuthu.UseVisualStyleBackColor = true;
-            // 
-            // rdo_quanly
-            // 
-            this.rdo_quanly.AutoSize = true;
-            this.rdo_quanly.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_quanly.Location = new System.Drawing.Point(17, 332);
-            this.rdo_quanly.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.rdo_quanly.Name = "rdo_quanly";
-            this.rdo_quanly.Size = new System.Drawing.Size(133, 33);
-            this.rdo_quanly.TabIndex = 4;
-            this.rdo_quanly.TabStop = true;
-            this.rdo_quanly.Text = "Quản Lý";
-            this.rdo_quanly.UseVisualStyleBackColor = true;
-            // 
-            // txt_Manv
-            // 
-            this.txt_Manv.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_Manv.Location = new System.Drawing.Point(17, 16);
-            this.txt_Manv.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txt_Manv.Name = "txt_Manv";
-            this.txt_Manv.Size = new System.Drawing.Size(381, 50);
-            this.txt_Manv.TabIndex = 3;
-            this.txt_Manv.Text = "";
+            this.txt_MaDocGia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_MaDocGia.Location = new System.Drawing.Point(17, 16);
+            this.txt_MaDocGia.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txt_MaDocGia.Name = "txt_MaDocGia";
+            this.txt_MaDocGia.ReadOnly = true;
+            this.txt_MaDocGia.Size = new System.Drawing.Size(381, 50);
+            this.txt_MaDocGia.TabIndex = 3;
+            this.txt_MaDocGia.Text = "";
             // 
             // txt_sdt
             // 
@@ -188,6 +168,7 @@
             this.btn_lammoi.Size = new System.Drawing.Size(89, 99);
             this.btn_lammoi.TabIndex = 4;
             this.btn_lammoi.UseVisualStyleBackColor = true;
+            this.btn_lammoi.Click += new System.EventHandler(this.btn_lammoi_Click);
             // 
             // txt_timkiem
             // 
@@ -210,6 +191,7 @@
             this.btn_them.Size = new System.Drawing.Size(89, 99);
             this.btn_them.TabIndex = 0;
             this.btn_them.UseVisualStyleBackColor = true;
+            this.btn_them.Click += new System.EventHandler(this.btn_them_Click);
             // 
             // btn_xoa
             // 
@@ -220,6 +202,7 @@
             this.btn_xoa.Size = new System.Drawing.Size(89, 99);
             this.btn_xoa.TabIndex = 2;
             this.btn_xoa.UseVisualStyleBackColor = true;
+            this.btn_xoa.Click += new System.EventHandler(this.btn_xoa_Click);
             // 
             // btn_sua
             // 
@@ -230,6 +213,7 @@
             this.btn_sua.Size = new System.Drawing.Size(89, 99);
             this.btn_sua.TabIndex = 1;
             this.btn_sua.UseVisualStyleBackColor = true;
+            this.btn_sua.Click += new System.EventHandler(this.btn_sua_Click);
             // 
             // lbl_qltt
             // 
@@ -241,6 +225,26 @@
             this.lbl_qltt.TabIndex = 5;
             this.lbl_qltt.Text = "QUẢN LÝ ĐỘC GIẢ";
             // 
+            // txt_diachi
+            // 
+            this.txt_diachi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_diachi.Location = new System.Drawing.Point(17, 322);
+            this.txt_diachi.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txt_diachi.Name = "txt_diachi";
+            this.txt_diachi.Size = new System.Drawing.Size(381, 50);
+            this.txt_diachi.TabIndex = 4;
+            this.txt_diachi.Text = "";
+            // 
+            // txt_tiencoc
+            // 
+            this.txt_tiencoc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_tiencoc.Location = new System.Drawing.Point(17, 398);
+            this.txt_tiencoc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txt_tiencoc.Name = "txt_tiencoc";
+            this.txt_tiencoc.Size = new System.Drawing.Size(381, 50);
+            this.txt_tiencoc.TabIndex = 5;
+            this.txt_tiencoc.Text = "";
+            // 
             // DocGiaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -250,13 +254,12 @@
             this.Controls.Add(this.lbl_qltt);
             this.Controls.Add(this.panel_chucnang);
             this.Controls.Add(this.panel_nhapdata);
-            this.Controls.Add(this.dgv_qltt);
+            this.Controls.Add(this.dgv_docgia);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "DocGiaForm";
             this.Text = "QLTT";
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_qltt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_docgia)).EndInit();
             this.panel_nhapdata.ResumeLayout(false);
-            this.panel_nhapdata.PerformLayout();
             this.panel_chucnang.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -265,10 +268,10 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgv_qltt;
+        private System.Windows.Forms.DataGridView dgv_docgia;
         private System.Windows.Forms.Panel panel_nhapdata;
         private System.Windows.Forms.RichTextBox txt_hoten;
-        private System.Windows.Forms.RichTextBox txt_Manv;
+        private System.Windows.Forms.RichTextBox txt_MaDocGia;
         private System.Windows.Forms.RichTextBox txt_sdt;
         private System.Windows.Forms.RichTextBox txt_email;
         private System.Windows.Forms.Panel panel_chucnang;
@@ -279,7 +282,7 @@
         private System.Windows.Forms.Label lbl_qltt;
         private System.Windows.Forms.Button btn_timkiem;
         private System.Windows.Forms.Button btn_lammoi;
-        private System.Windows.Forms.RadioButton rdo_quanly;
-        private System.Windows.Forms.RadioButton rdo_thuthu;
+        private System.Windows.Forms.RichTextBox txt_diachi;
+        private System.Windows.Forms.RichTextBox txt_tiencoc;
     }
 }

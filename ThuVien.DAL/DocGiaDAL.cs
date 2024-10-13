@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using ThuVien.DTO;
 
@@ -43,34 +44,34 @@ namespace ThuVien.DAL
         }
 
 
-        public List<DocGiaDTO> GetAllDocGia()
+        public DataTable GetAllDocGia()
         {
-            List<DocGiaDTO> l = new List<DocGiaDTO>();
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 string q = "SELECT id, ten, dienthoai, email, diachi, tiencoc FROM docgia";
                 SqlCommand cmd = new SqlCommand(q, conn);
 
                 conn.Open();
-                using (SqlDataReader r = cmd.ExecuteReader())
-                {
-                    while (r.Read())
-                    {
-                        DocGiaDTO d = new DocGiaDTO()
-                        {
-                            Id = (int)r["Id"],
-                            Ten = r["id"].ToString(),
-                            Email = r["email"].ToString(),
-                            DiaChi = r["diachi"].ToString(),
-                            DienThoai = r["dienthoai"].ToString(),
-                            TienCoc = (double)r["tiencoc"]
-                        };
-
-                        l.Add(d);
-                    }
-                }
+                DataTable dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                return dt;
             }
-            return l;
+        }
+
+        public DataTable GetDocGiaWithText(string text) {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                string q = "select id, ten, dienthoai, email, diachi, tiencoc FROM docgia where ten like @ten OR email like @email OR diachi like @diachi";
+                SqlCommand c = new SqlCommand(q, conn);
+                c.Parameters.AddWithValue("@ten", "%"+text+"%");
+                c.Parameters.AddWithValue("@email", "%"+text+"%");
+                c.Parameters.AddWithValue("@diachi", "%"+text+"%");
+
+                conn.Open();
+                DataTable dt = new DataTable();
+                dt.Load(c.ExecuteReader());
+                return dt;
+            }
         }
 
         public int InsertDocGia(DocGiaDTO docGia)
