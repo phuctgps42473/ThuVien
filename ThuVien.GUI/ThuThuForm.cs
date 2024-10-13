@@ -260,16 +260,7 @@ namespace ThuVien.GUI
             {
                 if (nv.Ten == txt_hoten.Text && nv.IsManager && rdo_thuthu.Checked)
                 {
-                    // Close or hide the current Home form
-                    this.Hide(); // Use this.Hide() instead of home.Close()
-
-                    // Create and show the login form
-                    DangNhapForm form = new DangNhapForm();
-                    form.Show();
-
-                    // Optionally, you can handle closing the application when the login form is closed
-                    form.FormClosed += (s, args) => this.Close(); // Close Home when DangNhapForm is closed
-
+                    Session.Instance.ClearNhanVien();
                     return;
                 }
                 MessageBox.Show("Sửa Thành Công");

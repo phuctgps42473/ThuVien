@@ -14,17 +14,28 @@ namespace ThuVien.GUI
 {
     public partial class Home : Form
     {
-        public void Dispose()
-        {
-            this.Dispose(true);
-        }
         public Home()
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             LoadUserInfoToTopBar();
             LoadTimeInfoToTopBar();
+            CheckAuth();
             LoadChildForm(new LoaiSachForm());
+        }
+
+        private void CheckAuth()
+        {
+            checkAuthTimer.Enabled = true;
+            checkAuthTimer.Interval = 1000;
+            checkAuthTimer.Tick += (s, e) =>
+            {
+                if (Session.Instance.NhanVien == null)
+                {
+                    this.Close();
+                }
+            };
+            checkAuthTimer.Start();
         }
 
 
@@ -130,7 +141,7 @@ namespace ThuVien.GUI
 
         private void thongKeBtn_Click(object sender, EventArgs e)
         {
-            //LoadChildForm(new ThongKe());
+            LoadChildForm(new ThongKeForm());
         }
 
         private void Home_Load(object sender, EventArgs e)

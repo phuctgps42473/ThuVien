@@ -100,6 +100,12 @@
     <Compile Include="LoaiSachForm.Designer.cs">
       <DependentUpon>LoaiSachForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ThongKeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThongKeForm.Designer.cs">
+      <DependentUpon>ThongKeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ThuThuForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +144,9 @@
     </Compile>
     <EmbeddedResource Include="LoaiSachForm.resx">
       <DependentUpon>LoaiSachForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThongKeForm.resx">
+      <DependentUpon>ThongKeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThuThuForm.resx">
       <DependentUpon>ThuThuForm.cs</DependentUpon>
