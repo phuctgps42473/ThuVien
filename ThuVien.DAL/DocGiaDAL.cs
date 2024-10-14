@@ -74,10 +74,11 @@ namespace ThuVien.DAL
             }
         }
 
-        public int InsertDocGia(DocGiaDTO docGia)
+        public bool InsertDocGia(DocGiaDTO docGia)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
+                conn.Open();
                 string q = "INSERT INTO docgia (ten, dienthoai, email, diachi, tiencoc) " +
                            "VALUES (@ten, @dienthoai, @email, @diachi, @tiencoc)";
                 SqlCommand cmd = new SqlCommand(q, conn);
@@ -86,16 +87,20 @@ namespace ThuVien.DAL
                 cmd.Parameters.AddWithValue("@email", docGia.Email);
                 cmd.Parameters.AddWithValue("@diachi", docGia.DiaChi);
                 cmd.Parameters.AddWithValue("@tiencoc", docGia.TienCoc);
+                if(cmd.ExecuteNonQuery()>0)
+                { return true; }
 
-                conn.Open();
-                return cmd.ExecuteNonQuery(); // Returns the number of rows affected
+                return false;
             }
+           
+            
         }
 
-        public int UpdateDocGia(DocGiaDTO docGia)
+        public bool UpdateDocGia(DocGiaDTO docGia)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
+                conn.Open();
                 string q = "UPDATE docgia SET ten = @ten, dienthoai = @dienthoai, email = @email, diachi = @diachi, tiencoc = @tiencoc WHERE id = @id";
                 SqlCommand cmd = new SqlCommand(q, conn);
                 cmd.Parameters.AddWithValue("@ten", docGia.Ten);
@@ -104,23 +109,31 @@ namespace ThuVien.DAL
                 cmd.Parameters.AddWithValue("@diachi", docGia.DiaChi);
                 cmd.Parameters.AddWithValue("@tiencoc", docGia.TienCoc);
                 cmd.Parameters.AddWithValue("@id", docGia.Id);
-
-                conn.Open();
-                return cmd.ExecuteNonQuery(); // Returns the number of rows affected
+                if(cmd.ExecuteNonQuery()>0)
+                {
+                    return true;
+                }
+                return false;
             }
+            
         }
 
-        public int DeleteDocGia(int id)
+        public bool DeleteDocGia(int id)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
+                conn.Open();
                 string q = "DELETE FROM docgia WHERE id = @id";
                 SqlCommand cmd = new SqlCommand(q, conn);
                 cmd.Parameters.AddWithValue("@id", id);
 
-                conn.Open();
-                return cmd.ExecuteNonQuery(); // Returns the number of rows affected
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+                return false;
             }
+           
         }
 
 

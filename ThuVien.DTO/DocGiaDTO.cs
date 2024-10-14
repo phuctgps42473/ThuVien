@@ -8,5 +8,24 @@
         public string Email { get; set; }
         public string DiaChi { get; set; }
         public double TienCoc { get; set; }
+
+        public DocGiaDTO() { }
+        public DocGiaDTO(int id, string ten, string dienThoai, string email, string diaChi, double tienCoc)
+        {
+            Id = id;
+            Ten = ten;
+            DienThoai = dienThoai;
+            Email = email;
+            DiaChi = diaChi;
+            TienCoc = tienCoc;
+        }
+        public DocGiaDTO( string ten, string dienThoai, string email, string diaChi, double tienCoc)
+        {
+            Ten = ten;
+            DienThoai = dienThoai;
+            Email = email;
+            DiaChi = diaChi;
+            TienCoc = tienCoc;
+        }
     }
 }
