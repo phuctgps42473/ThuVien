@@ -113,6 +113,25 @@ namespace ThuVien.DAL
             }
         }
 
+
+
+        public bool UpdateSoLuongSach(int soluong, int id)
+        {
+            using (SqlConnection conn = new SqlConnection(DALHelper.ConnectionString))
+            {
+                conn.Open();
+                string q = "UPDATE sach SET soluong = @soluong WHERE id = @id";
+                SqlCommand cmd = new SqlCommand(q, conn);
+                cmd.Parameters.AddWithValue("@soluong", soluong);
+                cmd.Parameters.AddWithValue("@id", id);
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+                return false;// Returns the number of rows affected
+            }
+        }
+
         public bool DeleteSach(int id)
         {
             using (SqlConnection conn = new SqlConnection(DALHelper.ConnectionString))

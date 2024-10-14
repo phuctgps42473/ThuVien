@@ -24,6 +24,11 @@ namespace ThuVien.BUS
         {
             return _sachDal.UpdateSach(sach);
         }
+
+        public bool UpdateSoLuongSach(int soluong, int id)
+        {
+            return _sachDal.UpdateSoLuongSach(soluong, id);
+        }
         public bool DeleteSach(int id)
         {
             return _sachDal.DeleteSach(id);

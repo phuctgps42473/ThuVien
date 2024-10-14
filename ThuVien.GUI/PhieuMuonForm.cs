@@ -15,6 +15,8 @@ namespace ThuVien.GUI
     public partial class PhieuMuonForm : Form
     {
         MuonTra_BUS muonTra_BUS = new MuonTra_BUS();
+        SachBus SachBus = new SachBus();
+
         public PhieuMuonForm()
         {
             InitializeComponent();
@@ -160,8 +162,15 @@ namespace ThuVien.GUI
                 txt_phithue.Focus();
                 return;
             }
+            if (int.Parse(txt_soluong.Text) > muonTra_BUS.GetAllSoLuong(int.Parse(cbo_mas.Text)))
+            {
+                MessageBox.Show("Số Lượng Nhập Không Hợp Lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txt_soluong.Focus();
+                return;
+            }
+            int soluong = int.Parse(txt_soluong.Text) - muonTra_BUS.GetAllSoLuong(int.Parse(cbo_mas.Text));
             PhieuMuonDTO pm = new PhieuMuonDTO(int.Parse(txt_soluong.Text), dtp_ngaymuon.Value, dtp_ngaytra.Value, int.Parse(txt_phithue.Text), txt_trangthai.Text, int.Parse(cbo_madg.Text), int.Parse(cbo_mas.Text), int.Parse(cbo_matt.Text));
-            if (muonTra_BUS.InsertPhieuMuon(pm))
+            if (muonTra_BUS.UpdatePhieuMuon(pm) && SachBus.UpdateSoLuongSach(soluong, int.Parse(cbo_mas.Text)))
             {
                 MessageBox.Show("Thêm Thành Công");
                 ResetValues();
@@ -263,8 +272,15 @@ namespace ThuVien.GUI
                 txt_phithue.Focus();
                 return;
             }
+            if (int.Parse(txt_soluong.Text) > muonTra_BUS.GetAllSoLuong(int.Parse(cbo_mas.Text)))
+            {
+                MessageBox.Show("Số Lượng Nhập Không Hợp Lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txt_soluong.Focus();
+                return;
+            }
+            int soluong = int.Parse(txt_soluong.Text) - muonTra_BUS.GetAllSoLuong(int.Parse(cbo_mas.Text));
             PhieuMuonDTO pm = new PhieuMuonDTO(int.Parse(txt_Mapm.Text),int.Parse(txt_soluong.Text), dtp_ngaymuon.Value, dtp_ngaytra.Value, int.Parse(txt_phithue.Text), txt_trangthai.Text, int.Parse(cbo_madg.Text), int.Parse(cbo_mas.Text), int.Parse(cbo_matt.Text));
-            if (muonTra_BUS.UpdatePhieuMuon(pm))
+            if (muonTra_BUS.UpdatePhieuMuon(pm) && SachBus.UpdateSoLuongSach(soluong, int.Parse(cbo_mas.Text)))
             {
                 MessageBox.Show("Cập Nhật Thành Công");
                 ResetValues();
