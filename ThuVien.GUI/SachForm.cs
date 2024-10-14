@@ -29,8 +29,6 @@ namespace ThuVien.GUI
             dgv_qltt.Columns[2].HeaderText = "Tác Giả";
             dgv_qltt.Columns[3].HeaderText = "Tái Bản";
             dgv_qltt.Columns[4].HeaderText = "Số lượng";
-            dgv_qltt.Columns[5].HeaderText = "Tồn Kho";
-            dgv_qltt.Columns[6].HeaderText = "Có Sẵn";
         }
 
 
@@ -70,7 +68,7 @@ namespace ThuVien.GUI
         private void btn_them_Click(object sender, EventArgs e)
         {
 
-            if (string.IsNullOrWhiteSpace(txt_tensach.Text) && string.IsNullOrWhiteSpace(txt_tacgia.Text) && string.IsNullOrWhiteSpace(txt_taiban.Text) && string.IsNullOrWhiteSpace(txt_soluong.Text) && string.IsNullOrWhiteSpace(txt_tonkho.Text) && string.IsNullOrWhiteSpace(txt_cosan.Text))
+            if (string.IsNullOrWhiteSpace(txt_tensach.Text) && string.IsNullOrWhiteSpace(txt_tacgia.Text) && string.IsNullOrWhiteSpace(txt_taiban.Text) && string.IsNullOrWhiteSpace(txt_soluong.Text))
             {
                 MessageBox.Show("Bạn Phải Nhập Đầy Đủ Thông Tin", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -102,31 +100,14 @@ namespace ThuVien.GUI
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(txt_tonkho.Text))
-            {
-                MessageBox.Show("Bạn Phải Nhập Mật Khẩu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txt_tonkho.Focus();
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(txt_cosan.Text))
-            {
-                MessageBox.Show("Bạn Phải Nhập Mật Khẩu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txt_cosan.Focus();
-                return;
-            }
-
-            int taiBan, soLuong, tonKho, cosan, idLoai;
-            bool isAvailable = true; // Set this based on your application's logic
+            int taiBan, soLuong, idLoai;
 
             // Try parsing the input values to integers
             bool isTaiBanValid = int.TryParse(txt_taiban.Text.Trim(), out taiBan);
             bool isSoLuongValid = int.TryParse(txt_soluong.Text.Trim(), out soLuong);
-            bool isTonKhoValid = int.TryParse(txt_tonkho.Text.Trim(), out tonKho);
-            bool isCoSanValid = int.TryParse(txt_cosan.Text.Trim(), out cosan); // Assuming this is meant to be an integer
             bool isIdLoaiValid = int.TryParse(cbo_loaisach.Text.Trim(), out idLoai);
             // Check if all values are valid
-            if (isTaiBanValid && isSoLuongValid && isTonKhoValid && isIdLoaiValid)
+            if (isTaiBanValid && isSoLuongValid && isIdLoaiValid)
             {
                 // Create an instance of SachDTO with the correct types
                 SachDTO sach = new SachDTO(
@@ -134,8 +115,6 @@ namespace ThuVien.GUI
                     txt_tacgia.Text.Trim(),  // string
                     taiBan,                  // int
                     soLuong,                 // int
-                    tonKho,                  // int
-                    cosan,
                     idLoai                   // int
                 );
 
@@ -195,22 +174,6 @@ namespace ThuVien.GUI
             }
         }
 
-        private void txt_tonkho_Click(object sender, EventArgs e)
-        {
-            if (txt_tonkho.Text == "Có Bao Nhiêu Sách Trong Kho")
-            {
-                txt_tonkho.Text = "";
-            }
-        }
-
-        private void txt_cosan_Click(object sender, EventArgs e)
-        {
-            if (txt_cosan.Text == "Sách Có Sẳn Hay Không")
-            {
-                txt_cosan.Text = "";
-            }
-        }
-
         private void txt_Manv_Click(object sender, EventArgs e)
         {
         }
@@ -218,7 +181,7 @@ namespace ThuVien.GUI
         private void btn_sua_Click(object sender, EventArgs e)
         {
 
-            if (string.IsNullOrWhiteSpace(txt_tensach.Text) && string.IsNullOrWhiteSpace(txt_tacgia.Text) && string.IsNullOrWhiteSpace(txt_taiban.Text) && string.IsNullOrWhiteSpace(txt_soluong.Text) && string.IsNullOrWhiteSpace(txt_tonkho.Text) && string.IsNullOrWhiteSpace(txt_cosan.Text))
+            if (string.IsNullOrWhiteSpace(txt_tensach.Text) && string.IsNullOrWhiteSpace(txt_tacgia.Text) && string.IsNullOrWhiteSpace(txt_taiban.Text) && string.IsNullOrWhiteSpace(txt_soluong.Text))
             {
                 MessageBox.Show("Bạn Phải Nhập Đầy Đủ Thông Tin", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -250,27 +213,11 @@ namespace ThuVien.GUI
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(txt_tonkho.Text))
-            {
-                MessageBox.Show("Bạn Phải Nhập Số Lượng Tồn Kho", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txt_tonkho.Focus();
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(txt_cosan.Text))
-            {
-                MessageBox.Show("Bạn Phải Nhập Số Sách Có Sẵn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txt_cosan.Focus();
-                return;
-            }
-
-            int taiBan, soLuong, tonKho, cosan, idLoai;
+            int taiBan, soLuong, idLoai;
 
             // Kiểm tra các tham số
             if (int.TryParse(txt_taiban.Text.Trim(), out taiBan) &&
                 int.TryParse(txt_soluong.Text.Trim(), out soLuong) &&
-                int.TryParse(txt_tonkho.Text.Trim(), out tonKho) &&
-                int.TryParse(txt_cosan.Text.Trim(), out cosan) &&
                 int.TryParse(cbo_loaisach.Text.Trim(), out idLoai) &&
                 int.TryParse(txt_masach.Text.Trim(), out int id)) // Lấy ID từ textbox
 
@@ -281,8 +228,6 @@ namespace ThuVien.GUI
                     txt_tacgia.Text.Trim(),  // string
                     taiBan,                  // int
                     soLuong,                 // int
-                    tonKho,                  // int
-                    cosan,                   // int
                     idLoai                   // int
                     )
                 {
@@ -328,15 +273,13 @@ namespace ThuVien.GUI
             txt_taiban.Text = "Tái Bản Lần Thứ Mấy";
             txt_tacgia.Text = "Tên Tác Giả";
             txt_soluong.Text = "Nhập Số Lượng Sách";
-            txt_tonkho.Text = "Có Bao Nhiêu Sách Trong Kho";
-            txt_cosan.Text = "Sách Có Sẳn Hay Không";
             cbo_loaisach.Text = "Nhập ID Thể Loại";
         }
         private void btn_xoa_Click(object sender, EventArgs e)
         {
             SachDTO sach = new SachDTO();
 
-            if (txt_tensach.Text == "Tên Sách" || txt_taiban.Text == "Tái Bản Lần Thứ Mấy" || txt_tacgia.Text == "Tên Tác Giả" || txt_soluong.Text == "Nhập Số Lượng Sách" || txt_tonkho.Text == "Có Bao Nhiêu Sách Trong Kho" || txt_cosan.Text == "Sách Có Sẳn Hay Không" || cbo_loaisach.Text == "Nhập ID Thể Loại")
+            if (txt_tensach.Text == "Tên Sách" || txt_taiban.Text == "Tái Bản Lần Thứ Mấy" || txt_tacgia.Text == "Tên Tác Giả" || txt_soluong.Text == "Nhập Số Lượng Sách" || cbo_loaisach.Text == "Nhập ID Thể Loại")
             {
                 MessageBox.Show("Bạn Phải Chọn Sách Để Xóa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -368,9 +311,6 @@ namespace ThuVien.GUI
                 txt_tacgia.Text = dgv_qltt.CurrentRow.Cells["tacgia"].Value.ToString();
                 txt_taiban.Text = dgv_qltt.CurrentRow.Cells["taiban"].Value.ToString();
                 txt_soluong.Text = dgv_qltt.CurrentRow.Cells["soluong"].Value.ToString();
-                txt_tonkho.Text = dgv_qltt.CurrentRow.Cells["tonkho"].Value.ToString();
-                txt_cosan.Text = dgv_qltt.CurrentRow.Cells["cosan"].Value.ToString();
-
 
                 cbo_loaisach.Text = dgv_qltt.CurrentRow.Cells["id_loaisach"].Value.ToString();
             }
