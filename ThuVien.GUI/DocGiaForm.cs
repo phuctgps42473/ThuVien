@@ -24,9 +24,9 @@ namespace ThuVien.GUI
         }
 
 
-        private void LoadGridView_DocGia(DataTable dt = null)
+        private void LoadGridView_DocGia()
         {
-            dgv_docgia.DataSource = dt ?? docGiaBUS.GetAllDocGia();
+            dgv_docgia.DataSource = docGiaBUS.GetAllDocGia();
             dgv_docgia.Columns[0].HeaderText = "Mã Độc Giả";
             dgv_docgia.Columns[1].HeaderText = "Tên Độc Giả";
             dgv_docgia.Columns[2].HeaderText = "Điện Thoại";
@@ -38,7 +38,7 @@ namespace ThuVien.GUI
         private void btn_timkiem_Click(object sender, EventArgs e)
         {
             DataTable dt = docGiaBUS.FindDocGiaWithText(txt_timkiem.Text);
-            LoadGridView_DocGia(dt);
+            LoadGridView_DocGia();
         }
 
         private void DataGridDocGia_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -95,8 +95,23 @@ namespace ThuVien.GUI
             DocGiaDTO docgia = GetDocGiaFromForm();
             if (docgia != null)
             {
-                docGiaBUS.CreateDocGia(docgia);
-                LoadGridView_DocGia();
+                // Kiểm tra dữ liệu
+                if (!ValidateForm())
+                {
+                    return;
+                }
+
+                // Nếu dữ liệu hợp lệ, tiến hành thêm
+                if (docGiaBUS.CreateDocGia(docgia))
+                {
+                    MessageBox.Show("Thêm Thành Công");
+                    ResetValue();
+                    LoadGridView_DocGia();
+                }
+                else
+                {
+                    MessageBox.Show("Thêm Thất Bại");
+                }
             }
         }
 
@@ -105,53 +120,172 @@ namespace ThuVien.GUI
             DocGiaDTO docgia = GetDocGiaFromForm();
             if (docgia != null)
             {
-                if (string.IsNullOrWhiteSpace(
-                    txt_MaDocGia.Text))
+                // Kiểm tra dữ liệu
+                if (!ValidateForm() || !ValidateId())
                 {
+                    return;
+                }
 
-                    MessageBox.Show("KHÔNG ĐƯỢC ĐỂ TRỐNG!");
-                    return;
-                }
-                
-                if (!int.TryParse(txt_MaDocGia.Text, out int id) || id <= 0)
+                // Đặt Id trước khi gọi UpdateDocGia
+                docgia.Id = int.Parse(txt_MaDocGia.Text);
+
+                // Sau đó mới gọi Update
+                if (docGiaBUS.UpdateDocGia(docgia))
                 {
-                    MessageBox.Show("ID SAI!");
-                    return;
+                    MessageBox.Show("Sửa Thành Công");
+                    LoadGridView_DocGia();
                 }
-                docgia.Id = id;
-                docGiaBUS.UpdateDocGia(docgia);
-                LoadGridView_DocGia();
+                else
+                {
+                    MessageBox.Show("Sửa Thất Bại");
+                }
             }
         }
 
         private void btn_xoa_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(
-                txt_MaDocGia.Text))
+            // Kiểm tra ID
+            if (!ValidateId())
             {
-
-                MessageBox.Show("KHÔNG ĐƯỢC ĐỂ TRỐNG!");
-                return;
-            }
-            if (!int.TryParse(txt_MaDocGia.Text, out int id) || id <= 0)
-            {
-                MessageBox.Show("ID SAI!");
                 return;
             }
 
-            docGiaBUS.DeleteDocGia(id);
-            LoadGridView_DocGia();
+            int id = int.Parse(txt_MaDocGia.Text);
+            if (docGiaBUS.DeleteDocGia(id))
+            {
+                MessageBox.Show("Xóa Thành Công");
+                ResetValue();
+                LoadGridView_DocGia();
+            }
+            else
+            {
+                MessageBox.Show("Xóa Thất Bại");
+            }
 
+        }
+        private void ResetValue()
+        {
+            txt_MaDocGia.Text = "Mã Độc Giả";
+            txt_hoten.Text = "Họ Tên Độc Giả";
+            txt_email.Text = "Email Độc Giả";
+            txt_diachi.Text = "Địa Chỉ";
+            txt_sdt.Text = "Số Điện Thoại Độc Giả";
+            txt_tiencoc.Text = "Tiền Cọc Sách";
+            txt_timkiem.Text = "Nhập Mã Sách";
         }
 
         private void btn_lammoi_Click(object sender, EventArgs e)
         {
-            txt_MaDocGia.Text = "";
-            txt_hoten.Text = "";
-            txt_email.Text = "";
-            txt_sdt.Text = "";
-            txt_diachi.Text = "";
-            txt_tiencoc.Text = "";
+            ResetValue();
         }
+
+        private void DocGiaForm_Load(object sender, EventArgs e)
+        {
+            ResetValue();
+        }
+
+        private void txt_hoten_Click(object sender, EventArgs e)
+        {
+            if (txt_hoten.Text == "Họ Tên Độc Giả")
+            {
+                txt_hoten.Text = "";
+            }
+        }
+
+        private void txt_email_Click(object sender, EventArgs e)
+        {
+            if (txt_email.Text == "Email Độc Giả")
+            {
+                txt_email.Text = "";
+            }
+        }
+
+        private void txt_sdt_Click(object sender, EventArgs e)
+        {
+            if (txt_sdt.Text == "Số Điện Thoại Độc Giả")
+            {
+                txt_sdt.Text = "";
+            }
+        }
+
+        private void txt_diachi_Click(object sender, EventArgs e)
+        {
+            if (txt_diachi.Text == "Địa Chỉ")
+            {
+                txt_diachi.Text = "";
+            }
+        }
+
+        private void txt_tiencoc_Click(object sender, EventArgs e)
+        {
+            if (txt_tiencoc.Text == "Tiền Cọc Sách")
+            {
+                txt_tiencoc.Text = "";
+            }
+        }
+
+        private void txt_MaDocGia_Click(object sender, EventArgs e)
+        {
+            if (txt_MaDocGia.Text == "Mã Độc Giả")
+            {
+                txt_MaDocGia.Text = "";
+            }
+        }
+
+        private void txt_timkiem_Click(object sender, EventArgs e)
+        {
+            if (txt_timkiem.Text == "Nhập Mã Sách")
+            {
+                txt_timkiem.Text = "";
+            }
+        }
+        // Kiểm tra form nhập liệu
+        private bool ValidateForm()
+        {
+            if (string.IsNullOrWhiteSpace(txt_hoten.Text) ||
+                string.IsNullOrWhiteSpace(txt_email.Text) ||
+                string.IsNullOrWhiteSpace(txt_sdt.Text) ||
+                string.IsNullOrWhiteSpace(txt_diachi.Text) ||
+                string.IsNullOrWhiteSpace(txt_tiencoc.Text))
+            {
+                MessageBox.Show("KHÔNG ĐƯỢC ĐỂ TRỐNG!");
+                return false;
+            }
+
+            if (!double.TryParse(txt_tiencoc.Text, out double _))
+            {
+                MessageBox.Show("TIỀN CỌC PHẢI LÀ SỐ!");
+                txt_tiencoc.Text = "";
+                return false;
+            }
+
+            // Kiểm tra email hợp lệ (ví dụ đơn giản)
+            if (!txt_email.Text.Contains("@"))
+            {
+                MessageBox.Show("EMAIL KHÔNG HỢP LỆ!");
+                return false;
+            }
+
+            return true;
+        }
+
+        // Kiểm tra ID hợp lệ
+        private bool ValidateId()
+        {
+            if (string.IsNullOrWhiteSpace(txt_MaDocGia.Text))
+            {
+                MessageBox.Show("KHÔNG ĐƯỢC ĐỂ TRỐNG MÃ ĐỘC GIẢ!");
+                return false;
+            }
+
+            if (!int.TryParse(txt_MaDocGia.Text, out int id) || id <= 0)
+            {
+                MessageBox.Show("ID SAI!");
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }
