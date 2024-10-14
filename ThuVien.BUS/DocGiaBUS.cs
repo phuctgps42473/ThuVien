@@ -26,18 +26,18 @@ namespace ThuVien.BUS
             return DocGiaDAL.GetDocGiaWithText(Keyword);
         }
 
-        public void CreateDocGia(DocGiaDTO docgia)
+        public bool CreateDocGia(DocGiaDTO docGiaDTO)
         {
-            DocGiaDAL.InsertDocGia(docgia);
+           return DocGiaDAL.InsertDocGia(docGiaDTO);
         }
-        public void UpdateDocGia(DocGiaDTO docgia)
+        public bool UpdateDocGia(DocGiaDTO docgia)
         {
-            DocGiaDAL.UpdateDocGia(docgia);
+            return DocGiaDAL.UpdateDocGia(docgia);
         }
 
-        public void DeleteDocGia(int id)
+        public bool DeleteDocGia(int id)
         {
-            DocGiaDAL.DeleteDocGia(id);
+            return DocGiaDAL.DeleteDocGia(id);
         }
     }
 }

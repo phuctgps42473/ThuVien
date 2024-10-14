@@ -59,7 +59,25 @@ namespace ThuVien.DAL
                 return data;
             }
         }
-
+        public int GetSoLuong(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(_connString))
+            {
+                string q = "SELECT soluong FROM sach WHERE id = @id";
+                SqlCommand cmd = new SqlCommand(q, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                object result = cmd.ExecuteScalar();
+                if (result != null && int.TryParse(result.ToString(), out int soluong))
+                {
+                    return soluong;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
         public DataTable GetAllIDDocGia()
         {
             using (SqlConnection conn = new SqlConnection(_connString))

@@ -63,6 +63,7 @@
             this.dgv_qltt.RowHeadersWidth = 51;
             this.dgv_qltt.RowTemplate.Height = 24;
             this.dgv_qltt.Size = new System.Drawing.Size(735, 466);
+            this.dgv_qltt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_qltt.TabIndex = 0;
             this.dgv_qltt.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_qltt_CellContentClick);
             // 
