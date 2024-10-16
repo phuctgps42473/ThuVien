@@ -63,6 +63,26 @@ namespace ThuVien.DAL
         {
             using (SqlConnection conn = new SqlConnection(_connString))
             {
+                string q = "SELECT cosan FROM sach WHERE id = @id";
+                SqlCommand cmd = new SqlCommand(q, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                object result = cmd.ExecuteScalar();
+                if (result != null && int.TryParse(result.ToString(), out int soluong))
+                {
+                    return soluong;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
+        public int GetSoLuongKho(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(_connString))
+            {
                 string q = "SELECT soluong FROM sach WHERE id = @id";
                 SqlCommand cmd = new SqlCommand(q, conn);
                 cmd.Parameters.AddWithValue("@id", id);
@@ -77,6 +97,36 @@ namespace ThuVien.DAL
                     return 0;
                 }
             }
+        }
+
+        public int GetPreviousBorrowQuantity(int mapm)
+        {
+            int previousBorrowQuantity = 0;
+
+            // Define the SQL query to get the previous borrowing quantity
+            string query = "SELECT soluonguong FROM phieumuon WHERE id = @Mapm";
+
+            // Assuming you have a method to create and open your SQL connection
+            using (SqlConnection conn = new SqlConnection(_connString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Mapm", mapm);
+
+                try
+                {
+                    conn.Open();
+                    // Execute the command and read the result
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        previousBorrowQuantity = Convert.ToInt32(result);
+                    }
+                }
+                catch (Exception ex)
+                {}
+            }
+
+            return previousBorrowQuantity;
         }
         public DataTable GetAllIDDocGia()
         {
