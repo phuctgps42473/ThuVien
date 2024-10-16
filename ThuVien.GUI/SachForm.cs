@@ -311,6 +311,7 @@ namespace ThuVien.GUI
                 txt_tacgia.Text = dgv_qltt.CurrentRow.Cells["tacgia"].Value.ToString();
                 txt_taiban.Text = dgv_qltt.CurrentRow.Cells["taiban"].Value.ToString();
                 txt_soluong.Text = dgv_qltt.CurrentRow.Cells["soluong"].Value.ToString();
+                txt_cosan.Text = dgv_qltt.CurrentRow.Cells["cosan"].Value.ToString();
 
                 cbo_loaisach.Text = dgv_qltt.CurrentRow.Cells["id_loaisach"].Value.ToString();
             }
@@ -323,6 +324,14 @@ namespace ThuVien.GUI
         private void btn_lammoi_Click(object sender, EventArgs e)
         {
             ResetValue();
+        }
+
+        private void txt_cosan_Click(object sender, EventArgs e)
+        {
+            if (txt_cosan.Text == "Số Sách Có Sẳn")
+            {
+                txt_cosan.Text = "";
+            }
         }
     }
 }
