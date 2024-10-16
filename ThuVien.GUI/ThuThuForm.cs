@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,50 @@ namespace ThuVien.GUI
         {
 
         }
+        public string RandomString(int size, bool lowerCase)
+        {
+            StringBuilder builder = new StringBuilder();
+            Random random = new Random();
+            char ch;
+            for (int i = 0; i < size; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+            if (lowerCase)
+                return builder.ToString().ToLower();
+            return builder.ToString();
+        }
+        //Tao day so ngau nhien
+        public int RandomNumber(int min, int max)
+        {
+            Random random = new Random();
+            return random.Next(min, max);
+        }
+
+        public void SendMail(string email, string password)
+        {
+            try
+            {
+                MailMessage Msg = new MailMessage();
+                Msg.Body = "Xin Chào Anh/Chị, Mật Khẩu Đăng Nhập Của Anh/Chị Là: " + password;
+                Msg.To.Add(email);
+                Msg.From = new MailAddress("DuAnQuanLyNongSan@gmail.com");
+                Msg.Subject = "Chào Mừng Bạn Đến Với Thư Viện Chung Tôi";
+
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.EnableSsl = true;
+
+                client.Credentials = new NetworkCredential("DuAnQuanLyNongSan@gmail.com", "sqsc sbex rmcs ypjp");
+                client.Send(Msg);
+                MessageBox.Show("Gửi mail thành công");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void LoadGridView_NhanVien()
         {
             dgv_qltt.DataSource = bustt.GetAllNhanVien();
@@ -171,12 +216,6 @@ namespace ThuVien.GUI
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(txt_matkhau.Text))
-            {
-                MessageBox.Show("Bạn Phải Nhập Mật Khẩu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txt_matkhau.Focus();
-                return;
-            }
 
             if (!rdo_quanly.Checked && !rdo_thuthu.Checked)
             {
@@ -191,13 +230,14 @@ namespace ThuVien.GUI
                 txt_sdt.Focus();
                 return;
             }
-
-            NhanVienDTO nd = new NhanVienDTO(txt_hoten.Text.Trim(), txt_email.Text.Trim(), txt_matkhau.Text.Trim(), txt_sdt.Text.Trim(), quanly);
+            string password = RandomString(4, true) + RandomNumber(1,9);
+            NhanVienDTO nd = new NhanVienDTO(txt_hoten.Text.Trim(), txt_email.Text.Trim(), password, txt_sdt.Text.Trim(), quanly);
             if (bustt.InsertNhanVien(nd))
             {
                 MessageBox.Show("Thêm Thành Công");
                 ResetValues();
                 LoadGridView_NhanVien();
+                SendMail(nd.Email, password);
             }
             else
             {
