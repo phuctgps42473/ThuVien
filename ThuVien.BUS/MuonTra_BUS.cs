@@ -24,6 +24,16 @@ namespace ThuVien.BUS
             return _phieuMuonDAL.GetSoLuong(id);
         }
 
+        public int GetAllSoLuongKho(int id)
+        {
+            return _phieuMuonDAL.GetSoLuongKho(id);
+        }
+        public int GetPreviousBorrowQuantity(int id)
+        {
+            return _phieuMuonDAL.GetPreviousBorrowQuantity(id);
+        }
+
+
         public DataTable GetAllIDDocGia()
         {
             return _phieuMuonDAL.GetAllIDDocGia();

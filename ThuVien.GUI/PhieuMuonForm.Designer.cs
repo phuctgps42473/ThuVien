@@ -69,8 +69,10 @@
             this.dgv_qlpm.Name = "dgv_qlpm";
             this.dgv_qlpm.RowHeadersWidth = 51;
             this.dgv_qlpm.RowTemplate.Height = 24;
+            this.dgv_qlpm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_qlpm.Size = new System.Drawing.Size(653, 373);
             this.dgv_qlpm.TabIndex = 0;
+            this.dgv_qlpm.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_qlpm_CellContentClick);
             // 
             // panel_nhapdata
             // 

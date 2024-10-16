@@ -29,6 +29,7 @@ namespace ThuVien.GUI
             dgv_qltt.Columns[2].HeaderText = "Tác Giả";
             dgv_qltt.Columns[3].HeaderText = "Tái Bản";
             dgv_qltt.Columns[4].HeaderText = "Số lượng";
+            dgv_qltt.Columns[5].HeaderText = "Có Sẳn";
         }
 
 
@@ -44,8 +45,7 @@ namespace ThuVien.GUI
                 dgv_qltt.Columns[2].HeaderText = "Tác Giả";
                 dgv_qltt.Columns[3].HeaderText = "Tái Bản";
                 dgv_qltt.Columns[4].HeaderText = "Số lượng";
-                dgv_qltt.Columns[5].HeaderText = "Tồn Kho";
-                dgv_qltt.Columns[6].HeaderText = "Có Sẵn";
+                dgv_qltt.Columns[5].HeaderText = "Có Sẳn";
             }
             else
             {
@@ -100,11 +100,12 @@ namespace ThuVien.GUI
                 return;
             }
 
-            int taiBan, soLuong, idLoai;
+            int taiBan, soLuong, idLoai, coSan;
 
             // Try parsing the input values to integers
             bool isTaiBanValid = int.TryParse(txt_taiban.Text.Trim(), out taiBan);
             bool isSoLuongValid = int.TryParse(txt_soluong.Text.Trim(), out soLuong);
+            bool iscosanValid = int.TryParse(txt_cosan.Text.Trim(), out coSan);
             bool isIdLoaiValid = int.TryParse(cbo_loaisach.Text.Trim(), out idLoai);
             // Check if all values are valid
             if (isTaiBanValid && isSoLuongValid && isIdLoaiValid)
@@ -114,7 +115,8 @@ namespace ThuVien.GUI
                     txt_tensach.Text.Trim(), // string
                     txt_tacgia.Text.Trim(),  // string
                     taiBan,                  // int
-                    soLuong,                 // int
+                    soLuong,   
+                    coSan,                   // int
                     idLoai                   // int
                 );
 
@@ -213,11 +215,12 @@ namespace ThuVien.GUI
                 return;
             }
 
-            int taiBan, soLuong, idLoai;
+            int taiBan, soLuong, idLoai, coSan;
 
             // Kiểm tra các tham số
             if (int.TryParse(txt_taiban.Text.Trim(), out taiBan) &&
                 int.TryParse(txt_soluong.Text.Trim(), out soLuong) &&
+                int.TryParse(txt_cosan.Text.Trim(), out coSan) &&
                 int.TryParse(cbo_loaisach.Text.Trim(), out idLoai) &&
                 int.TryParse(txt_masach.Text.Trim(), out int id)) // Lấy ID từ textbox
 
@@ -227,7 +230,8 @@ namespace ThuVien.GUI
                     txt_tensach.Text.Trim(), // string
                     txt_tacgia.Text.Trim(),  // string
                     taiBan,                  // int
-                    soLuong,                 // int
+                    soLuong,  
+                    coSan,// int
                     idLoai                   // int
                     )
                 {
@@ -273,6 +277,7 @@ namespace ThuVien.GUI
             txt_taiban.Text = "Tái Bản Lần Thứ Mấy";
             txt_tacgia.Text = "Tên Tác Giả";
             txt_soluong.Text = "Nhập Số Lượng Sách";
+            txt_cosan.Text = "Nhập Số Sách Có Sẳn";
             cbo_loaisach.Text = "Nhập ID Thể Loại";
         }
         private void btn_xoa_Click(object sender, EventArgs e)
@@ -312,7 +317,6 @@ namespace ThuVien.GUI
                 txt_taiban.Text = dgv_qltt.CurrentRow.Cells["taiban"].Value.ToString();
                 txt_soluong.Text = dgv_qltt.CurrentRow.Cells["soluong"].Value.ToString();
                 txt_cosan.Text = dgv_qltt.CurrentRow.Cells["cosan"].Value.ToString();
-
                 cbo_loaisach.Text = dgv_qltt.CurrentRow.Cells["id_loaisach"].Value.ToString();
             }
             else

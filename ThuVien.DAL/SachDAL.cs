@@ -50,7 +50,7 @@ namespace ThuVien.DAL
         {
             using (SqlConnection conn = new SqlConnection(_connString))
             {
-                string q = "SELECT id, ten, tacgia, taiban, soluong, id_loaisach FROM sach";
+                string q = "SELECT id, ten, tacgia, taiban, soluong, cosan, id_loaisach FROM sach";
                 SqlCommand cmd = new SqlCommand(q, conn);
                 conn.Open();
                 DataTable data = new DataTable();
@@ -64,13 +64,14 @@ namespace ThuVien.DAL
             using (SqlConnection conn = new SqlConnection(DALHelper.ConnectionString))
             {
                 conn.Open();
-                string q = "INSERT INTO sach (ten, tacgia, taiban, soluong, id_loaisach) " +
-                           "VALUES (@ten, @tacgia, @taiban, @soluong, @id_loaisach)";
+                string q = "INSERT INTO sach (ten, tacgia, taiban, soluong, cosan, id_loaisach) " +
+                           "VALUES (@ten, @tacgia, @taiban, @soluong,@cosan, @id_loaisach)";
                 SqlCommand cmd = new SqlCommand(q, conn);
                 cmd.Parameters.AddWithValue("@ten", sach.Ten);
                 cmd.Parameters.AddWithValue("@tacgia", sach.TacGia);
                 cmd.Parameters.AddWithValue("@taiban", sach.TaiBan);
                 cmd.Parameters.AddWithValue("@soluong", sach.SoLuong);
+                cmd.Parameters.AddWithValue("@cosan", sach.CoSan);
                 cmd.Parameters.AddWithValue("@id_loaisach", sach.IdLoai);
 
                 
@@ -89,12 +90,13 @@ namespace ThuVien.DAL
             {
                 conn.Open();
                 string q = "UPDATE sach SET ten = @ten, tacgia = @tacgia, taiban = @taiban, " +
-                           "soluong = @soluong, id_loaisach = @id_loaisach WHERE id = @id";
+                           "soluong = @soluong,cosan = @cosan, id_loaisach = @id_loaisach WHERE id = @id";
                 SqlCommand cmd = new SqlCommand(q, conn);
                 cmd.Parameters.AddWithValue("@ten", sach.Ten);
                 cmd.Parameters.AddWithValue("@tacgia", sach.TacGia);
                 cmd.Parameters.AddWithValue("@taiban", sach.TaiBan);
                 cmd.Parameters.AddWithValue("@soluong", sach.SoLuong);
+                cmd.Parameters.AddWithValue("@cosan", sach.CoSan);
                 cmd.Parameters.AddWithValue("@id_loaisach", sach.IdLoai);
                 cmd.Parameters.AddWithValue("@id", sach.Id);
 
@@ -114,7 +116,7 @@ namespace ThuVien.DAL
             using (SqlConnection conn = new SqlConnection(DALHelper.ConnectionString))
             {
                 conn.Open();
-                string q = "UPDATE sach SET soluong = @soluong WHERE id = @id";
+                string q = "UPDATE sach SET cosan = @soluong WHERE id = @id";
                 SqlCommand cmd = new SqlCommand(q, conn);
                 cmd.Parameters.AddWithValue("@soluong", soluong);
                 cmd.Parameters.AddWithValue("@id", id);
@@ -125,6 +127,24 @@ namespace ThuVien.DAL
                 return false;// Returns the number of rows affected
             }
         }
+
+
+        //public bool UpdateSoLuongSachCoSan(int soluong, int id)
+        //{
+        //    using (SqlConnection conn = new SqlConnection(DALHelper.ConnectionString))
+        //    {
+        //        conn.Open();
+        //        string q = "UPDATE sach SET cosan = @soluong WHERE id = @id";
+        //        SqlCommand cmd = new SqlCommand(q, conn);
+        //        cmd.Parameters.AddWithValue("@soluong", soluong);
+        //        cmd.Parameters.AddWithValue("@id", id);
+        //        if (cmd.ExecuteNonQuery() > 0)
+        //        {
+        //            return true;
+        //        }
+        //        return false;// Returns the number of rows affected
+        //    }
+        //}
 
         public bool DeleteSach(int id)
         {
@@ -150,7 +170,7 @@ namespace ThuVien.DAL
                 try
                 {
                     conn.Open();
-                    string q = "SELECT id, ten, tacgia, taiban, soluong, id_loaisach FROM sach WHERE ten LIKE '%' + @ten + '%'";
+                    string q = "SELECT id, ten, tacgia, taiban, soluong, cosan, id_loaisach FROM sach WHERE ten LIKE '%' + @ten + '%'";
                     SqlCommand cmd = new SqlCommand(q, conn);
 
                     // Use "@" prefix for parameter

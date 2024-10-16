@@ -162,13 +162,20 @@ namespace ThuVien.GUI
                 txt_phithue.Focus();
                 return;
             }
-            if (int.Parse(txt_soluong.Text) > muonTra_BUS.GetAllSoLuong(int.Parse(cbo_mas.Text)))
+           
+            int availableStock = muonTra_BUS.GetAllSoLuong(int.Parse(cbo_mas.Text));
+            int soluongtong = muonTra_BUS.GetAllSoLuongKho(int.Parse(cbo_mas.Text));
+            int borrowQuantity = int.Parse(txt_soluong.Text);
+
+            if (borrowQuantity > availableStock)
             {
-                MessageBox.Show("Số Lượng Nhập Không Hợp Lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Số lượng mượn không được lớn hơn số lượng sách còn lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txt_soluong.Focus();
                 return;
             }
-            int soluong = int.Parse(txt_soluong.Text) - muonTra_BUS.GetAllSoLuong(int.Parse(cbo_mas.Text));
+
+            int soluong = soluongtong - borrowQuantity;
+
             PhieuMuonDTO pm = new PhieuMuonDTO(int.Parse(txt_soluong.Text), dtp_ngaymuon.Value, dtp_ngaytra.Value, int.Parse(txt_phithue.Text), txt_trangthai.Text, int.Parse(cbo_madg.Text), int.Parse(cbo_mas.Text), int.Parse(cbo_matt.Text));
             if (muonTra_BUS.UpdatePhieuMuon(pm) && SachBus.UpdateSoLuongSach(soluong, int.Parse(cbo_mas.Text)))
             {
@@ -278,7 +285,18 @@ namespace ThuVien.GUI
                 txt_soluong.Focus();
                 return;
             }
-            int soluong = int.Parse(txt_soluong.Text) - muonTra_BUS.GetAllSoLuong(int.Parse(cbo_mas.Text));
+            int availableStock = muonTra_BUS.GetAllSoLuong(int.Parse(cbo_mas.Text));
+            int soluongtong = muonTra_BUS.GetAllSoLuongKho(int.Parse(cbo_mas.Text));
+            int borrowQuantity = int.Parse(txt_soluong.Text);
+
+            if (borrowQuantity > availableStock)
+            {
+                MessageBox.Show("Số lượng mượn không được lớn hơn số lượng sách còn lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txt_soluong.Focus();
+                return;
+            }
+
+            int soluong = soluongtong - borrowQuantity;
             PhieuMuonDTO pm = new PhieuMuonDTO(int.Parse(txt_Mapm.Text),int.Parse(txt_soluong.Text), dtp_ngaymuon.Value, dtp_ngaytra.Value, int.Parse(txt_phithue.Text), txt_trangthai.Text, int.Parse(cbo_madg.Text), int.Parse(cbo_mas.Text), int.Parse(cbo_matt.Text));
             if (muonTra_BUS.UpdatePhieuMuon(pm) && SachBus.UpdateSoLuongSach(soluong, int.Parse(cbo_mas.Text)))
             {
@@ -353,7 +371,9 @@ namespace ThuVien.GUI
                 txt_phithue.Focus();
                 return;
             }
-            if (muonTra_BUS.DeletePhieuMuon(int.Parse(txt_Mapm.Text)))
+
+            int soluongtong = muonTra_BUS.GetAllSoLuongKho(int.Parse(cbo_mas.Text));
+            if (muonTra_BUS.DeletePhieuMuon(int.Parse(txt_Mapm.Text)) && SachBus.UpdateSoLuongSach(soluongtong, int.Parse(cbo_mas.Text)))
             {
                 MessageBox.Show("Xóa Thành Công");
                 ResetValues();
@@ -374,6 +394,27 @@ namespace ThuVien.GUI
         private void txt_trangthai_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void dgv_qlpm_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgv_qlpm.Rows.Count > 1)
+            {
+                txt_Mapm.Text = dgv_qlpm.CurrentRow.Cells["id"].Value.ToString();
+                txt_soluong.Text = dgv_qlpm.CurrentRow.Cells["soluong"].Value.ToString();
+                dtp_ngaymuon.Text = dgv_qlpm.CurrentRow.Cells["ngaymuon"].Value.ToString();
+                dtp_ngaytra.Text = dgv_qlpm.CurrentRow.Cells["ngaytra"].Value.ToString();
+                dtp_ngaytra.Text = dgv_qlpm.CurrentRow.Cells["ngaytra"].Value.ToString();
+                txt_phithue.Text = dgv_qlpm.CurrentRow.Cells["phithue"].Value.ToString();
+                txt_trangthai.Text = dgv_qlpm.CurrentRow.Cells["trangthai"].Value.ToString();
+                cbo_madg.Text = dgv_qlpm.CurrentRow.Cells["id_docgia"].Value.ToString();
+                cbo_mas.Text = dgv_qlpm.CurrentRow.Cells["id_sach"].Value.ToString();
+                cbo_matt.Text = dgv_qlpm.CurrentRow.Cells["id_thuthu"].Value.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Bảng Không Tồn Tại Dữ Liệu", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
