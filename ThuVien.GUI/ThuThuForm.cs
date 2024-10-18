@@ -230,7 +230,7 @@ namespace ThuVien.GUI
                 txt_sdt.Focus();
                 return;
             }
-            string password = RandomString(4, true) + RandomNumber(1,9);
+            string password = RandomString(5, true) + RandomNumber(1,99);
             NhanVienDTO nd = new NhanVienDTO(txt_hoten.Text.Trim(), txt_email.Text.Trim(), password, txt_sdt.Text.Trim(), quanly);
             if (bustt.InsertNhanVien(nd))
             {

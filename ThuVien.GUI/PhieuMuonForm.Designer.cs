@@ -42,7 +42,6 @@
             this.dtp_ngaytra = new System.Windows.Forms.DateTimePicker();
             this.dtp_ngaymuon = new System.Windows.Forms.DateTimePicker();
             this.txt_Mapm = new System.Windows.Forms.RichTextBox();
-            this.txt_trangthai = new System.Windows.Forms.RichTextBox();
             this.txt_phithue = new System.Windows.Forms.RichTextBox();
             this.txt_soluong = new System.Windows.Forms.RichTextBox();
             this.panel_chucnang = new System.Windows.Forms.Panel();
@@ -53,6 +52,7 @@
             this.btn_xoa = new System.Windows.Forms.Button();
             this.btn_sua = new System.Windows.Forms.Button();
             this.lbl_qltt = new System.Windows.Forms.Label();
+            this.cbo_trangthai = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_qlpm)).BeginInit();
             this.panel_nhapdata.SuspendLayout();
             this.panel_chucnang.SuspendLayout();
@@ -70,7 +70,7 @@
             this.dgv_qlpm.RowHeadersWidth = 51;
             this.dgv_qlpm.RowTemplate.Height = 24;
             this.dgv_qlpm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_qlpm.Size = new System.Drawing.Size(653, 373);
+            this.dgv_qlpm.Size = new System.Drawing.Size(906, 373);
             this.dgv_qlpm.TabIndex = 0;
             this.dgv_qlpm.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_qlpm_CellContentClick);
             // 
@@ -80,6 +80,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_nhapdata.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel_nhapdata.BackColor = System.Drawing.Color.Silver;
+            this.panel_nhapdata.Controls.Add(this.cbo_trangthai);
             this.panel_nhapdata.Controls.Add(this.lbl_ngaytra);
             this.panel_nhapdata.Controls.Add(this.lbl_ngaymuon);
             this.panel_nhapdata.Controls.Add(this.label2);
@@ -91,10 +92,9 @@
             this.panel_nhapdata.Controls.Add(this.dtp_ngaytra);
             this.panel_nhapdata.Controls.Add(this.dtp_ngaymuon);
             this.panel_nhapdata.Controls.Add(this.txt_Mapm);
-            this.panel_nhapdata.Controls.Add(this.txt_trangthai);
             this.panel_nhapdata.Controls.Add(this.txt_phithue);
             this.panel_nhapdata.Controls.Add(this.txt_soluong);
-            this.panel_nhapdata.Location = new System.Drawing.Point(670, 53);
+            this.panel_nhapdata.Location = new System.Drawing.Point(923, 53);
             this.panel_nhapdata.Name = "panel_nhapdata";
             this.panel_nhapdata.Size = new System.Drawing.Size(368, 373);
             this.panel_nhapdata.TabIndex = 3;
@@ -192,17 +192,6 @@
             this.txt_Mapm.TabIndex = 3;
             this.txt_Mapm.Text = "";
             // 
-            // txt_trangthai
-            // 
-            this.txt_trangthai.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_trangthai.Location = new System.Drawing.Point(15, 239);
-            this.txt_trangthai.Name = "txt_trangthai";
-            this.txt_trangthai.Size = new System.Drawing.Size(339, 41);
-            this.txt_trangthai.TabIndex = 2;
-            this.txt_trangthai.Text = "";
-            this.txt_trangthai.Click += new System.EventHandler(this.txt_trangthai_Click);
-            this.txt_trangthai.TextChanged += new System.EventHandler(this.txt_trangthai_TextChanged);
-            // 
             // txt_phithue
             // 
             this.txt_phithue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -237,7 +226,7 @@
             this.panel_chucnang.Controls.Add(this.btn_sua);
             this.panel_chucnang.Location = new System.Drawing.Point(9, 432);
             this.panel_chucnang.Name = "panel_chucnang";
-            this.panel_chucnang.Size = new System.Drawing.Size(1031, 109);
+            this.panel_chucnang.Size = new System.Drawing.Size(1284, 109);
             this.panel_chucnang.TabIndex = 4;
             // 
             // btn_timkiem
@@ -268,7 +257,7 @@
             this.txt_timkiem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_timkiem.Location = new System.Drawing.Point(900, 39);
             this.txt_timkiem.Name = "txt_timkiem";
-            this.txt_timkiem.Size = new System.Drawing.Size(120, 41);
+            this.txt_timkiem.Size = new System.Drawing.Size(373, 41);
             this.txt_timkiem.TabIndex = 3;
             this.txt_timkiem.Text = "";
             this.txt_timkiem.Click += new System.EventHandler(this.txt_timkiem_Click);
@@ -313,12 +302,23 @@
             this.lbl_qltt.TabIndex = 5;
             this.lbl_qltt.Text = "QUẢN LÝ PHIẾU MƯỢN";
             // 
+            // cbo_trangthai
+            // 
+            this.cbo_trangthai.FormattingEnabled = true;
+            this.cbo_trangthai.Items.AddRange(new object[] {
+            "Mượn",
+            "Trả"});
+            this.cbo_trangthai.Location = new System.Drawing.Point(15, 251);
+            this.cbo_trangthai.Name = "cbo_trangthai";
+            this.cbo_trangthai.Size = new System.Drawing.Size(339, 24);
+            this.cbo_trangthai.TabIndex = 16;
+            // 
             // PhieuMuonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(1052, 553);
+            this.ClientSize = new System.Drawing.Size(1305, 553);
             this.Controls.Add(this.lbl_qltt);
             this.Controls.Add(this.panel_chucnang);
             this.Controls.Add(this.panel_nhapdata);
@@ -341,7 +341,6 @@
         private System.Windows.Forms.Panel panel_nhapdata;
         private System.Windows.Forms.RichTextBox txt_soluong;
         private System.Windows.Forms.RichTextBox txt_Mapm;
-        private System.Windows.Forms.RichTextBox txt_trangthai;
         private System.Windows.Forms.RichTextBox txt_phithue;
         private System.Windows.Forms.Panel panel_chucnang;
         private System.Windows.Forms.RichTextBox txt_timkiem;
@@ -361,5 +360,6 @@
         private System.Windows.Forms.ComboBox cbo_mas;
         private System.Windows.Forms.Label lbl_iddg;
         private System.Windows.Forms.ComboBox cbo_madg;
+        private System.Windows.Forms.ComboBox cbo_trangthai;
     }
 }
