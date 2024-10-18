@@ -16,7 +16,7 @@ namespace ThuVien.GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PhieuMuonForm());
+            Application.Run(new DangNhapForm());
         }
     }
 }
