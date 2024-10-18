@@ -57,7 +57,7 @@ namespace ThuVien.GUI
             txt_phithue.Text = "Phí Thuê";
             txt_soluong.Text = "Số Lượng";
             txt_timkiem.Text = "Tìm Kiếm Mã Phiếu";
-            txt_trangthai.Text = "Trạng Thái Phiếu";
+            cbo_trangthai.Text = "Trạng Thái Phiếu";
             cbo_madg.Text = "Mã Độc Giả";
             cbo_mas.Text = "Mã Sách";
             cbo_matt.Text = "Mã Thủ Thư";
@@ -104,7 +104,7 @@ namespace ThuVien.GUI
 
         private void btn_them_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txt_soluong.Text) && string.IsNullOrWhiteSpace(txt_phithue.Text) && string.IsNullOrWhiteSpace(txt_trangthai.Text) && string.IsNullOrWhiteSpace(cbo_madg.Text) && string.IsNullOrWhiteSpace(cbo_mas.Text) && string.IsNullOrWhiteSpace(cbo_matt.Text))
+            if (string.IsNullOrWhiteSpace(txt_soluong.Text) && string.IsNullOrWhiteSpace(txt_phithue.Text) && string.IsNullOrWhiteSpace(cbo_trangthai.Text) && string.IsNullOrWhiteSpace(cbo_madg.Text) && string.IsNullOrWhiteSpace(cbo_mas.Text) && string.IsNullOrWhiteSpace(cbo_matt.Text))
             {
                 MessageBox.Show("Bạn Phải Nhập Đầy Đủ Thông Tin", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -156,7 +156,7 @@ namespace ThuVien.GUI
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(txt_trangthai.Text))
+            if (string.IsNullOrWhiteSpace(cbo_trangthai.Text))
             {
                 MessageBox.Show("Bạn Phải Nhập Phí Thuê", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txt_phithue.Focus();
@@ -176,7 +176,7 @@ namespace ThuVien.GUI
 
             int soluong = soluongtong - borrowQuantity;
 
-            PhieuMuonDTO pm = new PhieuMuonDTO(int.Parse(txt_soluong.Text), dtp_ngaymuon.Value, dtp_ngaytra.Value, int.Parse(txt_phithue.Text), txt_trangthai.Text, int.Parse(cbo_madg.Text), int.Parse(cbo_mas.Text), int.Parse(cbo_matt.Text));
+            PhieuMuonDTO pm = new PhieuMuonDTO(int.Parse(txt_soluong.Text), dtp_ngaymuon.Value, dtp_ngaytra.Value, int.Parse(txt_phithue.Text), cbo_trangthai.Text, int.Parse(cbo_madg.Text), int.Parse(cbo_mas.Text), int.Parse(cbo_matt.Text));
             if (muonTra_BUS.UpdatePhieuMuon(pm) && SachBus.UpdateSoLuongSach(soluong, int.Parse(cbo_mas.Text)))
             {
                 MessageBox.Show("Thêm Thành Công");
@@ -213,15 +213,15 @@ namespace ThuVien.GUI
 
         private void txt_trangthai_Click(object sender, EventArgs e)
         {
-            if (txt_trangthai.Text == "Trạng Thái Phiếu")
+            if (cbo_trangthai.Text == "Trạng Thái Phiếu")
             {
-                txt_trangthai.Text = "";
+                cbo_trangthai.Text = "";
             }
         }
 
         private void btn_sua_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txt_soluong.Text) && string.IsNullOrWhiteSpace(txt_phithue.Text) && string.IsNullOrWhiteSpace(txt_trangthai.Text) && string.IsNullOrWhiteSpace(cbo_madg.Text) && string.IsNullOrWhiteSpace(cbo_mas.Text) && string.IsNullOrWhiteSpace(cbo_matt.Text))
+            if (string.IsNullOrWhiteSpace(txt_soluong.Text) && string.IsNullOrWhiteSpace(txt_phithue.Text) && string.IsNullOrWhiteSpace(cbo_trangthai.Text) && string.IsNullOrWhiteSpace(cbo_madg.Text) && string.IsNullOrWhiteSpace(cbo_mas.Text) && string.IsNullOrWhiteSpace(cbo_matt.Text))
             {
                 MessageBox.Show("Bạn Phải Nhập Đầy Đủ Thông Tin", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -273,7 +273,7 @@ namespace ThuVien.GUI
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(txt_trangthai.Text))
+            if (string.IsNullOrWhiteSpace(cbo_trangthai.Text))
             {
                 MessageBox.Show("Bạn Phải Nhập Phí Thuê", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txt_phithue.Focus();
@@ -297,7 +297,7 @@ namespace ThuVien.GUI
             }
 
             int soluong = soluongtong - borrowQuantity;
-            PhieuMuonDTO pm = new PhieuMuonDTO(int.Parse(txt_Mapm.Text),int.Parse(txt_soluong.Text), dtp_ngaymuon.Value, dtp_ngaytra.Value, int.Parse(txt_phithue.Text), txt_trangthai.Text, int.Parse(cbo_madg.Text), int.Parse(cbo_mas.Text), int.Parse(cbo_matt.Text));
+            PhieuMuonDTO pm = new PhieuMuonDTO(int.Parse(txt_Mapm.Text),int.Parse(txt_soluong.Text), dtp_ngaymuon.Value, dtp_ngaytra.Value, int.Parse(txt_phithue.Text), cbo_trangthai.Text, int.Parse(cbo_madg.Text), int.Parse(cbo_mas.Text), int.Parse(cbo_matt.Text));
             if (muonTra_BUS.UpdatePhieuMuon(pm) && SachBus.UpdateSoLuongSach(soluong, int.Parse(cbo_mas.Text)))
             {
                 MessageBox.Show("Cập Nhật Thành Công");
@@ -313,7 +313,7 @@ namespace ThuVien.GUI
 
         private void btn_xoa_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txt_soluong.Text) && string.IsNullOrWhiteSpace(txt_phithue.Text) && string.IsNullOrWhiteSpace(txt_trangthai.Text) && string.IsNullOrWhiteSpace(cbo_madg.Text) && string.IsNullOrWhiteSpace(cbo_mas.Text) && string.IsNullOrWhiteSpace(cbo_matt.Text))
+            if (string.IsNullOrWhiteSpace(txt_soluong.Text) && string.IsNullOrWhiteSpace(txt_phithue.Text) && string.IsNullOrWhiteSpace(cbo_trangthai.Text) && string.IsNullOrWhiteSpace(cbo_madg.Text) && string.IsNullOrWhiteSpace(cbo_mas.Text) && string.IsNullOrWhiteSpace(cbo_matt.Text))
             {
                 MessageBox.Show("Bạn Phải Nhập Đầy Đủ Thông Tin", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -365,7 +365,7 @@ namespace ThuVien.GUI
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(txt_trangthai.Text))
+            if (string.IsNullOrWhiteSpace(cbo_trangthai.Text))
             {
                 MessageBox.Show("Bạn Phải Nhập Phí Thuê", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txt_phithue.Focus();
@@ -406,7 +406,7 @@ namespace ThuVien.GUI
                 dtp_ngaytra.Text = dgv_qlpm.CurrentRow.Cells["ngaytra"].Value.ToString();
                 dtp_ngaytra.Text = dgv_qlpm.CurrentRow.Cells["ngaytra"].Value.ToString();
                 txt_phithue.Text = dgv_qlpm.CurrentRow.Cells["phithue"].Value.ToString();
-                txt_trangthai.Text = dgv_qlpm.CurrentRow.Cells["trangthai"].Value.ToString();
+                cbo_trangthai.Text = dgv_qlpm.CurrentRow.Cells["trangthai"].Value.ToString();
                 cbo_madg.Text = dgv_qlpm.CurrentRow.Cells["id_docgia"].Value.ToString();
                 cbo_mas.Text = dgv_qlpm.CurrentRow.Cells["id_sach"].Value.ToString();
                 cbo_matt.Text = dgv_qlpm.CurrentRow.Cells["id_thuthu"].Value.ToString();
